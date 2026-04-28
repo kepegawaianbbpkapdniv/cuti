@@ -93,12 +93,16 @@
 </head>
 <body class="antialiased text-slate-900 min-h-screen pb-12">
 
-    <!-- Navigasi -->
+    <!-- Navigasi dengan Logo -->
     <nav class="sticky top-4 z-50 px-4 mb-12">
         <div class="max-w-7xl mx-auto bg-slate-900/95 backdrop-blur-md rounded-3xl border border-white/10 shadow-2xl h-24 flex justify-between items-center px-8 text-left">
-            <div class="flex flex-col">
-                <span class="font-extrabold text-xl text-white tracking-tight uppercase leading-none">Layanan Cuti ASN</span>
-                <span class="text-[9px] text-slate-400 font-bold uppercase tracking-[0.2em] mt-1">BBPK APDN IV MAKASSAR</span>
+            <div class="flex items-center gap-5">
+                <!-- Logo BBPK -->
+                <img src="LOGO_BBPK_APDN_IV-removebg-preview (1).png" alt="Logo BBPK APDN IV" class="h-16 w-auto object-contain drop-shadow-lg" onerror="this.style.display='none'">
+                <div class="flex flex-col">
+                    <span class="font-extrabold text-xl text-white tracking-tight uppercase leading-none">Layanan Cuti ASN</span>
+                    <span class="text-[9px] text-slate-400 font-bold uppercase tracking-[0.2em] mt-1">BBPK APDN IV MAKASSAR</span>
+                </div>
             </div>
             <div class="bg-white/5 border border-white/10 px-5 py-2.5 rounded-2xl hidden sm:flex items-center gap-3">
                  <i class="fas fa-shield-halved text-gold text-sm"></i>
@@ -114,19 +118,19 @@
             <h1 class="text-5xl md:text-8xl font-black text-slate-900 tracking-tighter leading-none uppercase">
                 Alur Pengajuan <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-900 to-gold">Cuti</span>
             </h1>
-            <p class="text-slate-600 font-semibold text-lg max-w-2xl mx-auto leading-relaxed">
+            <p class="text-slate-600 font-semibold text-lg max-w-2xl mx-auto leading-relaxed text-left md:text-center">
                 Panduan standar operasional prosedur pengelolaan cuti pegawai secara transparan dan akuntabel di lingkup BBPK APDN IV Makassar.
             </p>
         </div>
 
         <!-- Filter Tab (Dropdown) -->
         <div class="bg-white/70 border border-slate-200 rounded-[3rem] p-8 shadow-xl backdrop-blur-xl max-w-6xl mx-auto mb-16">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start text-left text-left">
                 <div class="space-y-4">
                     <label class="flex items-center gap-2 text-[11px] font-black text-blue-900 uppercase tracking-widest ml-2">
                         <i class="fas fa-list-check text-gold"></i> 1. Kategori Cuti
                     </label>
-                    <div class="bg-slate-200/50 p-1.5 rounded-[2rem] flex flex-col sm:flex-row gap-1 shadow-inner">
+                    <div class="bg-slate-200/50 p-1.5 rounded-[2rem] flex flex-col sm:flex-row gap-1 shadow-inner text-center">
                         <button onclick="updateType('tahunan')" id="type-tahunan" class="flex-1 py-4 px-4 rounded-[1.6rem] font-black text-[10px] uppercase transition-all nav-pill-active">
                             Cuti Tahunan & Sakit
                         </button>
@@ -151,14 +155,14 @@
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 text-left">
-            <!-- Timeline Alur -->
+            <!-- Kolom Visual Alur -->
             <div class="lg:col-span-7 space-y-4 text-left" id="flow-content"></div>
 
-            <!-- Sidebar -->
+            <!-- Kolom Samping -->
             <div class="lg:col-span-5 space-y-8 text-left">
-                <!-- Target Waktu -->
-                <div class="bg-mesh rounded-[3rem] p-10 text-white shadow-2xl relative overflow-hidden group">
-                    <div class="relative z-10 text-left">
+                <!-- Target Mutu Waktu -->
+                <div class="bg-mesh rounded-[3rem] p-10 text-white shadow-2xl relative overflow-hidden group text-left">
+                    <div class="relative z-10 text-left text-left">
                         <div class="flex items-center gap-3 mb-6">
                              <div class="w-10 h-10 rounded-xl bg-gold/20 flex items-center justify-center border border-gold/30">
                                  <i class="fas fa-history text-gold"></i>
@@ -167,130 +171,159 @@
                         </div>
                         <div class="flex items-baseline gap-2">
                             <span class="text-7xl font-black tracking-tighter" id="display-time">H-5</span>
-                            <span class="text-lg font-bold text-slate-400 italic uppercase">Hari Kerja</span>
+                            <span class="text-lg font-bold text-slate-400 italic uppercase text-left">Hari Kerja</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Checklist -->
+                <!-- Checklist Mandiri -->
                 <div class="bento-card bg-emerald-900 rounded-[3.5rem] p-10 text-white shadow-xl relative overflow-hidden">
-                    <h3 class="text-xl font-black mb-6 flex items-center gap-3 uppercase tracking-tighter text-left">
+                    <h3 class="text-xl font-black mb-6 flex items-center gap-3 uppercase tracking-tighter text-left text-left">
                         <i class="fas fa-clipboard-check text-gold"></i> Checklist Berkas
                     </h3>
-                    <div class="space-y-4 text-left font-medium" id="checklist-content"></div>
+                    <div class="space-y-4 text-left font-medium text-left" id="checklist-content"></div>
                 </div>
 
-                <!-- Unduh Formulir -->
-                <div class="bento-card bg-white border-4 border-amber-500 p-10 rounded-[3.5rem] text-center shadow-2xl relative overflow-hidden">
-                    <div class="w-16 h-16 bg-amber-100 rounded-2xl flex items-center justify-center text-amber-600 mx-auto mb-6 shadow-inner">
-                        <i class="fas fa-file-pdf text-3xl"></i>
+                <!-- Unduh Formulir (Warna Kontras Amber) -->
+                <div class="bento-card bg-white border-4 border-amber-500 p-10 rounded-[3.5rem] text-center shadow-2xl relative overflow-hidden text-center">
+                    <div class="w-16 h-16 bg-amber-100 rounded-2xl flex items-center justify-center text-amber-600 mx-auto mb-6 shadow-inner text-center">
+                        <i class="fas fa-file-pdf text-3xl text-center"></i>
                     </div>
                     <h4 class="text-xl font-black text-slate-900 mb-4 uppercase tracking-tighter text-center">Pusat Formulir</h4>
-                    <p class="text-sm text-slate-600 mb-10 leading-relaxed font-bold italic text-center">"Unduh dokumen persyaratan resmi melalui link di bawah ini."</p>
-                    <a href="https://drive.google.com/drive/u/0/folders/1KGmfZeg5sUweOWVz7tYEFE2K1akv7m4D" target="_blank" class="block w-full bg-amber-500 hover:bg-amber-600 text-white py-6 rounded-[2rem] font-black text-sm uppercase tracking-[0.2em] shadow-[0_15px_30px_-5px_rgba(245,158,11,0.5)] transition-all transform hover:scale-[1.03]">
-                        <i class="fas fa-cloud-arrow-down mr-2 text-lg"></i> Buka Google Drive
+                    <p class="text-sm text-slate-600 mb-10 leading-relaxed font-bold italic text-center text-center">"Unduh dokumen persyaratan resmi melalui link di bawah ini."</p>
+                    <a href="https://drive.google.com/drive/u/0/folders/1KGmfZeg5sUweOWVz7tYEFE2K1akv7m4D" target="_blank" class="block w-full bg-amber-500 hover:bg-amber-600 text-white py-6 rounded-[2rem] font-black text-sm uppercase tracking-[0.2em] shadow-[0_15px_30px_-5px_rgba(245,158,11,0.5)] transition-all transform hover:scale-[1.03] text-center">
+                        <i class="fas fa-cloud-arrow-down mr-2 text-lg text-center"></i> Buka Google Drive
                     </a>
                 </div>
 
-                <!-- FAQ Singkat -->
+                <!-- FAQ Lengkap -->
                 <div class="p-8 bg-blue-50 rounded-[3rem] border border-blue-100 shadow-sm text-left">
-                    <h4 class="text-[11px] font-black text-blue-900 uppercase tracking-widest mb-6 text-center">Tanya Jawab (FAQ)</h4>
+                    <h4 class="text-[11px] font-black text-blue-900 uppercase tracking-widest mb-6 text-center text-center">Pusat Informasi & FAQ</h4>
                     <div class="space-y-3">
                         <details class="group bg-white p-4 rounded-2xl border border-blue-100 cursor-pointer">
-                            <summary class="text-[11px] font-bold text-slate-700 uppercase tracking-wide list-none flex justify-between items-center text-left">
+                            <summary class="text-[11px] font-bold text-slate-700 uppercase tracking-wide list-none flex justify-between items-center text-left text-left">
                                 Berapa lama proses verifikasi? <i class="fas fa-plus text-[10px] text-blue-300 group-open:rotate-45 transition-transform"></i>
                             </summary>
-                            <p class="text-[11px] text-slate-500 mt-3 leading-relaxed font-medium">Verifikasi internal di tingkat Balai maksimal dilakukan dalam 2 hari kerja.</p>
+                            <p class="text-[11px] text-slate-500 mt-3 leading-relaxed font-medium text-left">Verifikasi internal di tingkat Balai maksimal dilakukan dalam 2 hari kerja.</p>
+                        </details>
+                        
+                        <details class="group bg-white p-4 rounded-2xl border border-blue-100 cursor-pointer text-left text-left">
+                            <summary class="text-[11px] font-bold text-slate-700 uppercase tracking-wide list-none flex justify-between items-center text-left text-left text-left">
+                                Bagaimana Jika Cuti Sakit Mendadak? <i class="fas fa-plus text-[10px] text-blue-300 group-open:rotate-45 transition-transform text-left"></i>
+                            </summary>
+                            <p class="text-[11px] text-slate-500 mt-3 leading-relaxed font-medium text-left text-left">Segera lapor via WhatsApp ke Atasan & SDM. Berkas fisik menyusul segera setelah kondisi memungkinkan.</p>
+                        </details>
+
+                        <details class="group bg-white p-4 rounded-2xl border border-blue-100 cursor-pointer text-left text-left text-left">
+                            <summary class="text-[11px] font-bold text-slate-700 uppercase tracking-wide list-none flex justify-between items-center text-left text-left text-left text-left text-left">
+                                Syarat CAP (Cuti Alasan Penting)? <i class="fas fa-plus text-[10px] text-blue-300 group-open:rotate-45 transition-transform"></i>
+                            </summary>
+                            <p class="text-[11px] text-slate-500 mt-3 leading-relaxed font-medium text-left text-left text-left text-left">Mencakup pernikahan pertama, musibah keluarga inti, atau urusan darurat. Wajib lampirkan bukti autentik asli.</p>
+                        </details>
+
+                        <details class="group bg-white p-4 rounded-2xl border border-blue-100 cursor-pointer text-left text-left text-left text-left">
+                            <summary class="text-[11px] font-bold text-slate-700 uppercase tracking-wide list-none flex justify-between items-center text-left text-left text-left text-left">
+                                Cuti bagi CPNS / Pegawai Baru? <i class="fas fa-plus text-[10px] text-blue-300 group-open:rotate-45 transition-transform text-left"></i>
+                            </summary>
+                            <p class="text-[11px] text-slate-500 mt-3 leading-relaxed font-medium text-left text-left text-left text-left">Sesuai aturan BKN, Cuti Tahunan hanya diberikan setelah 1 tahun bekerja terus-menerus. Cuti Sakit tetap dapat diberikan sesuai kebutuhan medis.</p>
+                        </details>
+
+                        <details class="group bg-white p-4 rounded-2xl border border-blue-100 cursor-pointer text-left text-left text-left text-left">
+                            <summary class="text-[11px] font-bold text-slate-700 uppercase tracking-wide list-none flex justify-between items-center text-left text-left text-left text-left">
+                                Bagaimana jika sisa cuti tidak terpakai? <i class="fas fa-plus text-[10px] text-blue-300 group-open:rotate-45 transition-transform"></i>
+                            </summary>
+                            <p class="text-[11px] text-slate-500 mt-3 leading-relaxed font-medium text-left text-left text-left text-left">Sisa cuti tahun berjalan dapat diambil di tahun berikutnya paling banyak 6 hari kerja, dengan akumulasi maksimal 18 hari kerja.</p>
                         </details>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- SEKSI KONTAK (LEBIH VISUAL) -->
-        <section class="mt-20 max-w-5xl mx-auto bg-white border border-slate-200 rounded-[4rem] p-12 shadow-2xl relative overflow-hidden text-left">
-            <div class="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
-                <i class="fas fa-comments text-9xl text-blue-900"></i>
+        <!-- Seksi Kontak -->
+        <section class="mt-20 max-w-5xl mx-auto bg-white border border-slate-200 rounded-[4rem] p-12 shadow-2xl relative overflow-hidden text-left text-left text-left">
+            <div class="absolute top-0 right-0 p-8 opacity-10 pointer-events-none text-left">
+                <i class="fas fa-comments text-9xl text-blue-900 text-left text-left text-left text-left"></i>
             </div>
-            <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-10">
-                <div class="flex items-center gap-8">
-                    <div class="w-20 h-20 bg-gradient-to-br from-blue-900 to-slate-800 rounded-3xl flex items-center justify-center text-white text-3xl shadow-xl ring-4 ring-blue-50">
+            <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-10 text-left text-left text-left">
+                <div class="flex items-center gap-8 text-left text-left text-left text-left">
+                    <div class="w-20 h-20 bg-gradient-to-br from-blue-900 to-slate-800 rounded-3xl flex items-center justify-center text-white text-3xl shadow-xl ring-4 ring-blue-50 text-left text-left">
                         <i class="fas fa-headset text-gold"></i>
                     </div>
-                    <div>
-                        <h3 class="text-2xl font-black text-slate-900 uppercase tracking-tight mb-2">Butuh Konsultasi?</h3>
-                        <p class="text-slate-600 text-base font-semibold leading-relaxed">Subbag SDM & Umum BBPK APDN IV Makassar <br>siap membantu kendala administrasi Anda.</p>
+                    <div class="text-left text-left text-left">
+                        <h3 class="text-2xl font-black text-slate-900 uppercase tracking-tight mb-2 text-left">Butuh Konsultasi?</h3>
+                        <p class="text-slate-600 text-base font-semibold leading-relaxed text-left text-left text-left text-left">Subbag SDM & Umum BBPK APDN IV Makassar <br>siap membantu kendala administrasi Anda.</p>
                     </div>
                 </div>
                 <div class="bg-slate-50 p-6 rounded-[2.5rem] border border-slate-200 text-center md:text-right shrink-0">
                     <span class="text-[11px] font-black text-blue-600 uppercase tracking-widest block mb-1">WAKTU LAYANAN</span>
-                    <p class="text-xl font-black text-slate-900 tracking-tight">SENIN - JUMAT</p>
+                    <p class="text-xl font-black text-slate-900 tracking-tight uppercase">Senin - Jumat</p>
                     <p class="text-sm font-bold text-slate-500 uppercase tracking-tighter">08:00 - 16:00 WITA</p>
                 </div>
             </div>
         </section>
 
-        <!-- SEKSI NILAI ASN (BerAKHLAK) - TIDAK POLOS LAGI -->
-        <section class="mt-24 max-w-7xl mx-auto">
-            <h4 class="text-center text-[10px] font-black text-slate-400 uppercase tracking-[0.5em] mb-12">Core Values ASN</h4>
-            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
+        <!-- Seksi BerAKHLAK -->
+        <section class="mt-24 max-w-7xl mx-auto text-center">
+            <h4 class="text-center text-[10px] font-black text-slate-400 uppercase tracking-[0.5em] mb-12 text-center text-center">Core Values ASN</h4>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 text-center">
                 <div class="akhlak-badge bg-blue-50/50 p-6 rounded-[2rem] text-center">
-                    <i class="fas fa-hands-holding-child text-blue-600 text-xl mb-3 block"></i>
-                    <span class="text-[9px] font-black uppercase text-blue-900">Berorientasi Pelayanan</span>
+                    <i class="fas fa-hands-holding-child text-blue-600 text-xl mb-3 block text-center"></i>
+                    <span class="text-[9px] font-black uppercase text-blue-900 text-center">Berorientasi Pelayanan</span>
                 </div>
-                <div class="akhlak-badge bg-amber-50/50 p-6 rounded-[2rem] text-center">
-                    <i class="fas fa-balance-scale text-amber-600 text-xl mb-3 block"></i>
-                    <span class="text-[9px] font-black uppercase text-amber-900">Akuntabel</span>
+                <div class="akhlak-badge bg-amber-50/50 p-6 rounded-[2rem] text-center text-center">
+                    <i class="fas fa-balance-scale text-amber-600 text-xl mb-3 block text-center"></i>
+                    <span class="text-[9px] font-black uppercase text-amber-900 text-center">Akuntabel</span>
                 </div>
-                <div class="akhlak-badge bg-emerald-50/50 p-6 rounded-[2rem] text-center">
-                    <i class="fas fa-book-open-reader text-emerald-600 text-xl mb-3 block"></i>
-                    <span class="text-[9px] font-black uppercase text-emerald-900">Kompeten</span>
+                <div class="akhlak-badge bg-emerald-50/50 p-6 rounded-[2rem] text-center text-center">
+                    <i class="fas fa-book-open-reader text-emerald-600 text-xl mb-3 block text-center text-center"></i>
+                    <span class="text-[9px] font-black uppercase text-emerald-900 text-center">Kompeten</span>
                 </div>
-                <div class="akhlak-badge bg-rose-50/50 p-6 rounded-[2rem] text-center">
-                    <i class="fas fa-people-group text-rose-600 text-xl mb-3 block"></i>
-                    <span class="text-[9px] font-black uppercase text-rose-900">Harmonis</span>
+                <div class="akhlak-badge bg-rose-50/50 p-6 rounded-[2rem] text-center text-center">
+                    <i class="fas fa-people-group text-rose-600 text-xl mb-3 block text-center"></i>
+                    <span class="text-[9px] font-black uppercase text-rose-900 text-center">Harmonis</span>
                 </div>
-                <div class="akhlak-badge bg-purple-50/50 p-6 rounded-[2rem] text-center">
-                    <i class="fas fa-heart-shield text-purple-600 text-xl mb-3 block"></i>
-                    <span class="text-[9px] font-black uppercase text-purple-900">Loyal</span>
+                <div class="akhlak-badge bg-purple-50/50 p-6 rounded-[2rem] text-center text-center text-center">
+                    <i class="fas fa-award text-purple-600 text-xl mb-3 block text-center"></i>
+                    <span class="text-[9px] font-black uppercase text-purple-900 text-center">Loyal</span>
                 </div>
-                <div class="akhlak-badge bg-sky-50/50 p-6 rounded-[2rem] text-center">
-                    <i class="fas fa-arrows-rotate text-sky-600 text-xl mb-3 block"></i>
-                    <span class="text-[9px] font-black uppercase text-sky-900">Adaptif</span>
+                <div class="akhlak-badge bg-sky-50/50 p-6 rounded-[2rem] text-center text-center text-center">
+                    <i class="fas fa-arrows-rotate text-sky-600 text-xl mb-3 block text-center text-center"></i>
+                    <span class="text-[9px] font-black uppercase text-sky-900 text-center text-center">Adaptif</span>
                 </div>
-                <div class="akhlak-badge bg-indigo-50/50 p-6 rounded-[2rem] text-center">
-                    <i class="fas fa-handshake text-indigo-600 text-xl mb-3 block"></i>
-                    <span class="text-[9px] font-black uppercase text-indigo-900">Kolaboratif</span>
+                <div class="akhlak-badge bg-indigo-50/50 p-6 rounded-[2rem] text-center text-center">
+                    <i class="fas fa-handshake text-indigo-600 text-xl mb-3 block text-center text-center"></i>
+                    <span class="text-[9px] font-black uppercase text-indigo-900 text-center">Kolaboratif</span>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- FOOTER RESMI (TERANG & BERIKON) -->
+    <!-- Footer dengan Logo -->
     <footer class="mt-32 border-t border-slate-200 bg-white py-20 text-slate-900 relative">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <div class="mb-12 flex flex-col items-center">
-                <div class="w-12 h-1.5 bg-gold rounded-full mb-8"></div>
-                <h4 class="text-3xl font-black tracking-tighter uppercase mb-2 text-blue-900">Balai Besar Pengembangan Kompetensi</h4>
-                <p class="text-gold font-black tracking-[0.4em] text-sm uppercase mb-8">APARATUR PEMERINTAHAN DALAM NEGERI IV MAKASSAR</p>
+        <div class="max-w-7xl mx-auto px-6 text-center text-center">
+            <div class="mb-12 flex flex-col items-center text-center">
+                <!-- Logo Footer -->
+                <img src="LOGO_BBPK_APDN_IV-removebg-preview (1).png" alt="Logo BBPK" class="h-20 w-auto object-contain mb-8 grayscale hover:grayscale-0 transition-all opacity-50 hover:opacity-100" onerror="this.style.display='none'">
+                <div class="w-12 h-1.5 bg-gold rounded-full mb-8 text-center text-center text-center"></div>
+                <h4 class="text-3xl font-black tracking-tighter uppercase mb-2 text-blue-900 text-center">Balai Besar Pengembangan Kompetensi</h4>
+                <p class="text-gold font-black tracking-[0.4em] text-sm uppercase text-center text-center text-center">APARATUR PEMERINTAHAN DALAM NEGERI IV MAKASSAR</p>
                 
-                <div class="flex flex-col md:flex-row gap-6 text-[11px] font-bold text-slate-500 uppercase tracking-widest">
-                    <span class="flex items-center gap-2"><i class="fas fa-location-dot text-gold"></i> Jln. AP. Pettarani No. 72, Makassar</span>
+                <div class="flex flex-col md:flex-row gap-6 text-[11px] font-bold text-slate-500 uppercase tracking-widest text-center mt-6 text-center">
+                    <span class="flex items-center gap-2 text-center text-center"><i class="fas fa-location-dot text-gold"></i> Paccerakkang No.3, Paccerakkang, Kec. Biringkanaya, Kota Makassar, Sulawesi Selatan 90241</span>
                     <span class="hidden md:block">|</span>
-                    <span class="flex items-center gap-2"><i class="fas fa-envelope text-gold"></i> sdm.bbpkapdn4@kemendagri.go.id</span>
+                    <span class="flex items-center gap-2 text-center text-center"><i class="fas fa-envelope text-gold"></i> kepegawaianbbpkapdn@gmail.com</span>
                 </div>
             </div>
 
-            <!-- Link Terkait (Dekoratif) -->
-            <div class="flex justify-center gap-8 mb-16 grayscale opacity-60 hover:grayscale-0 transition-all">
+            <div class="flex justify-center gap-8 mb-16 grayscale opacity-60 hover:grayscale-0 transition-all text-center text-center">
                 <i class="fas fa-landmark text-2xl" title="Kemendagri"></i>
                 <i class="fas fa-building-columns text-2xl" title="BPSDM"></i>
                 <i class="fas fa-envelope-open-text text-2xl" title="SRIKANDI"></i>
                 <i class="fas fa-fingerprint text-2xl" title="Absensi Digital"></i>
             </div>
             
-            <div class="pt-8 border-t border-slate-100">
-                <p class="text-[10px] font-black text-slate-300 uppercase tracking-[0.8em]">© 2026 KEMENTERIAN DALAM NEGERI - REPUBLIK INDONESIA</p>
+            <div class="pt-8 border-t border-slate-100 text-center">
+                <p class="text-[10px] font-black text-slate-300 uppercase tracking-[0.8em] text-center">© 2026 KEMENTERIAN DALAM NEGERI - REPUBLIK INDONESIA</p>
             </div>
         </div>
     </footer>
@@ -364,14 +397,14 @@
                 };
                 html += `
                 <div class="step-node flex gap-10 animate-fade relative group text-left" style="animation-delay: ${i * 0.1}s">
-                    <div class="flex-shrink-0 w-16 h-16 rounded-[1.4rem] border-2 flex items-center justify-center text-2xl z-10 shadow-xl transition-all duration-500 group-hover:scale-110 ${colorMap[s.color]}">
+                    <div class="flex-shrink-0 w-16 h-16 rounded-[1.4rem] border-2 flex items-center justify-center text-2xl z-10 shadow-xl transition-all duration-500 group-hover:scale-110 ${colorMap[s.color]} text-left">
                         <i class="fas ${s.icon}"></i>
                     </div>
                     <div class="flex-1 pb-12 text-left">
                         <div class="glass-card p-10 rounded-[3rem] shadow-sm hover:shadow-2xl hover:border-gold transition-all duration-500 group-hover:translate-x-2 text-left">
                             <span class="text-[9px] font-black text-slate-400 uppercase tracking-[0.3em] mb-4 block text-left">Langkah 0${i+1}</span>
                             <h5 class="text-2xl font-black text-slate-900 mb-3 tracking-tight uppercase text-left tracking-tighter">${s.role}</h5>
-                            <p class="text-base text-slate-500 font-medium leading-relaxed text-left text-left text-left">${s.desc}</p>
+                            <p class="text-base text-slate-500 font-medium leading-relaxed text-left text-left text-left text-left">${s.desc}</p>
                         </div>
                     </div>
                 </div>`;
@@ -381,9 +414,9 @@
             let checkHtml = '';
             data.requirements.forEach((req, idx) => {
                 checkHtml += `
-                <div class="flex items-center gap-4 bg-white/10 p-4 rounded-2xl border border-white/10 hover:bg-white/20 transition-colors text-left text-left text-left">
-                    <input type="checkbox" id="check-${idx}" class="w-5 h-5 rounded accent-gold cursor-pointer">
-                    <label for="check-${idx}" class="text-sm font-bold cursor-pointer select-none leading-tight uppercase tracking-wide text-left text-white">${req}</label>
+                <div class="flex items-center gap-4 bg-white/10 p-4 rounded-2xl border border-white/10 hover:bg-white/20 transition-colors text-left text-left text-left text-left">
+                    <input type="checkbox" id="check-${idx}" class="w-5 h-5 rounded accent-gold cursor-pointer text-left">
+                    <label for="check-${idx}" class="text-sm font-bold cursor-pointer select-none leading-tight uppercase tracking-wide text-left text-white text-left text-left">${req}</label>
                 </div>`;
             });
             checkContainer.innerHTML = checkHtml;
