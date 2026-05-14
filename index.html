@@ -7,329 +7,430 @@
     <!-- Framework & Fonts -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --kemendagri: #0c1a33;
+            --primary: #0c1a33;
             --gold: #c5a059;
-            --amber-high: #f59e0b;
+            --gold-bright: #f0c57a;
+            --accent-blue: #3b82f6;
+            --accent-indigo: #6366f1;
+            --accent-emerald: #10b981;
+            --accent-amber: #f59e0b;
+            --bg-dark: #070f1d;
         }
         
         body { 
-            font-family: 'Inter', sans-serif; 
-            background-color: #f8fafc;
-            background-image: 
-                radial-gradient(at 0% 0%, rgba(197, 160, 89, 0.05) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(12, 26, 51, 0.05) 0px, transparent 50%);
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: var(--bg-dark);
+            color: #e2e8f0;
+            overflow-x: hidden;
         }
 
-        .bg-mesh {
-            background-color: #0c1a33;
-            background-image: 
-                radial-gradient(at 80% 10%, rgba(197, 160, 89, 0.2) 0px, transparent 50%),
-                radial-gradient(at 20% 90%, rgba(59, 130, 246, 0.2) 0px, transparent 50%);
-        }
-
-        .glass-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .nav-pill-active {
-            background: var(--gold);
-            color: white !important;
-            box-shadow: 0 10px 20px -5px rgba(197, 160, 89, 0.5);
-        }
-
-        .step-node::after {
-            content: '';
-            position: absolute;
-            left: 28px;
-            top: 70px;
-            bottom: -30px;
-            width: 2px;
-            background: linear-gradient(to bottom, #cbd5e1 50%, transparent 50%);
-            background-size: 2px 12px;
-        }
-        .step-node:last-child::after { display: none; }
-
-        .bento-card {
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .bento-card:hover { transform: translateY(-8px); }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade { animation: fadeIn 0.4s ease-out forwards; }
-
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-            height: 0;
-            overflow: hidden;
-            border-radius: 2rem;
-        }
-        .video-container iframe {
-            position: absolute;
+        /* Mesh Background */
+        .mesh-bg {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            border: 0;
+            z-index: -1;
+            background: 
+                radial-gradient(at 0% 0%, rgba(12, 26, 51, 1) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(197, 160, 89, 0.2) 0px, transparent 50%),
+                radial-gradient(at 50% 100%, rgba(59, 130, 246, 0.2) 0px, transparent 50%),
+                #070f1d;
         }
 
-        .akhlak-badge {
-            transition: all 0.3s ease;
-            border: 1px solid rgba(0,0,0,0.05);
+        /* Top Header */
+        .top-header {
+            background: rgba(12, 26, 51, 0.7);
+            backdrop-filter: blur(25px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
-        .akhlak-badge:hover {
-            transform: scale(1.05);
-            background-color: white;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+
+        /* Global Bottom Nav */
+        .bottom-nav {
+            background: rgba(12, 26, 51, 0.9);
+            backdrop-filter: blur(40px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 60px -10px rgba(0, 0, 0, 0.8);
+        }
+
+        .nav-link {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: rgba(255, 255, 255, 0.4);
+        }
+        .nav-link.active {
+            color: var(--gold-bright);
+            transform: translateY(-4px);
+            text-shadow: 0 0 15px rgba(197, 160, 89, 0.4);
+        }
+
+        /* Bento Cards */
+        .card-vibrant {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.5s ease;
+        }
+        .card-vibrant:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.07);
+            border-color: var(--gold);
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #fff, var(--gold), #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: textFlow 5s linear infinite;
+        }
+
+        @keyframes textFlow {
+            to { background-position: 200% center; }
+        }
+
+        .content-section {
+            display: none;
+            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .content-section.active { display: block; }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
+
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23c5a059'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1.5rem center;
+            background-size: 1.2rem;
+        }
+
+        /* CTA Button Glow */
+        .btn-gold-glow {
+            background: linear-gradient(135deg, var(--gold), #f3d4a0);
+            box-shadow: 0 10px 40px -10px rgba(197, 160, 89, 0.6);
+            transition: all 0.4s ease;
+        }
+        .btn-gold-glow:hover {
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: 0 20px 50px -10px rgba(197, 160, 89, 0.8);
         }
     </style>
 </head>
-<body class="antialiased text-slate-900 min-h-screen pb-12">
+<body class="antialiased">
 
-    <!-- Navigasi -->
-    <nav class="sticky top-4 z-50 px-4 mb-12">
-        <div class="max-w-7xl mx-auto bg-slate-900/95 backdrop-blur-md rounded-3xl border border-white/10 shadow-2xl h-24 flex justify-between items-center px-8 text-left">
-            <div class="flex items-center gap-5">
-                <img src="LOGO_BBPK_APDN_IV-removebg-preview (1).png" alt="Logo BBPK APDN IV" class="h-16 w-auto object-contain drop-shadow-lg">
-                <div class="flex flex-col">
-                    <span class="font-extrabold text-xl text-white tracking-tight uppercase leading-none">Layanan Cuti ASN</span>
-                    <span class="text-[9px] text-slate-400 font-bold uppercase tracking-[0.2em] mt-1">BBPK APDN IV MAKASSAR</span>
+    <div class="mesh-bg"></div>
+
+    <!-- Top Header Branding -->
+    <header class="fixed top-0 left-0 w-full z-[90] top-header">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <img src="LOGO_BBPK_APDN_IV-removebg-preview (1).png" alt="Logo" class="h-12 w-auto">
+                <div class="hidden sm:block">
+                    <h2 class="text-white font-black text-sm uppercase tracking-tighter leading-none">Portal Cuti Digital</h2>
+                    <p class="text-gold font-bold text-[8px] uppercase tracking-[0.4em] mt-1">BBPK APDN IV Makassar</p>
                 </div>
             </div>
-            <div class="bg-white/5 border border-white/10 px-5 py-2.5 rounded-2xl hidden sm:flex items-center gap-3">
-                 <i class="fas fa-shield-halved text-gold text-sm"></i>
-                 <span class="text-[10px] font-black text-white uppercase tracking-widest">SOP DIGITAL 2026</span>
+            <div class="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-full border border-white/10">
+                <div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+                <span class="text-[9px] font-black text-slate-300 uppercase tracking-widest">SOP Online 2026</span>
             </div>
         </div>
+    </header>
+
+    <!-- Global Floating Bottom Navigation -->
+    <nav class="fixed bottom-10 left-1/2 -translate-x-1/2 w-[90%] max-w-2xl bottom-nav rounded-[2.5rem] p-4 flex justify-around items-center z-[100] ring-1 ring-white/10">
+        <button onclick="showSection('home')" id="bot-home" class="nav-link flex flex-col items-center gap-1 active">
+            <i class="fas fa-home text-lg"></i>
+            <span class="text-[9px] font-black uppercase tracking-widest mt-1">Home</span>
+        </button>
+        <button onclick="showSection('alur')" id="bot-alur" class="nav-link flex flex-col items-center gap-1">
+            <i class="fas fa-route text-lg"></i>
+            <span class="text-[9px] font-black uppercase tracking-widest mt-1">Alur</span>
+        </button>
+        <button onclick="showSection('video')" id="bot-video" class="nav-link flex flex-col items-center gap-1">
+            <i class="fas fa-play-circle text-lg"></i>
+            <span class="text-[9px] font-black uppercase tracking-widest mt-1">Video</span>
+        </button>
+        <button onclick="showSection('waktu')" id="bot-waktu" class="nav-link flex flex-col items-center gap-1">
+            <i class="fas fa-hourglass-half text-lg"></i>
+            <span class="text-[9px] font-black uppercase tracking-widest mt-1">Waktu</span>
+        </button>
+        <button onclick="showSection('faq')" id="bot-faq" class="nav-link flex flex-col items-center gap-1">
+            <i class="fas fa-question-circle text-lg"></i>
+            <span class="text-[9px] font-black uppercase tracking-widest mt-1">FAQ</span>
+        </button>
     </nav>
 
-    <main class="max-w-7xl mx-auto px-6">
+    <!-- Main Content -->
+    <main class="min-h-screen pt-32 pb-44 px-6 lg:px-20 max-w-7xl mx-auto">
         
-        <!-- Hero Section -->
-        <div class="text-center mb-12 space-y-4 animate-fade md:text-center">
-            <h1 class="text-5xl md:text-8xl font-black text-slate-900 tracking-tighter leading-none uppercase">
-                Alur Pengajuan <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-900 to-gold">Cuti</span>
-            </h1>
-            <p class="text-slate-600 font-semibold text-lg max-w-2xl mx-auto leading-relaxed md:text-center">
-                Panduan standar operasional prosedur pengelolaan cuti pegawai secara transparan dan akuntabel di lingkup BBPK APDN IV Makassar.
-            </p>
-        </div>
-
-        <!-- Filter Tab -->
-        <div class="bg-white/70 border border-slate-200 rounded-[3rem] p-8 shadow-xl backdrop-blur-xl max-w-6xl mx-auto mb-12">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-                <div class="space-y-4 text-left">
-                    <label class="flex items-center gap-2 text-[11px] font-black text-blue-900 uppercase tracking-widest ml-2">
-                        <i class="fas fa-list-check text-gold"></i> 1. Kategori Cuti
-                    </label>
-                    <div class="bg-slate-200/50 p-1.5 rounded-[2rem] flex flex-col sm:flex-row gap-1 shadow-inner">
-                        <button onclick="updateType('tahunan')" id="type-tahunan" class="flex-1 py-4 px-4 rounded-[1.6rem] font-black text-[10px] uppercase transition-all nav-pill-active">
-                            Cuti Tahunan & Sakit
-                        </button>
-                        <button onclick="updateType('penting')" id="type-penting" class="flex-1 py-4 px-4 rounded-[1.6rem] font-black text-[10px] uppercase transition-all text-slate-500 hover:text-slate-700">
-                            Cuti Alasan Penting & Melahirkan
-                        </button>
-                    </div>
-                </div>
-
-                <div class="space-y-4 text-left">
-                    <label for="role-select" class="flex items-center gap-2 text-[11px] font-black text-blue-900 uppercase tracking-widest ml-2">
-                        <i class="fas fa-user-tag text-gold"></i> 2. Klasifikasi Jabatan
-                    </label>
-                    <div class="relative">
-                        <select id="role-select" onchange="updateRole(this.value)" class="w-full bg-white border-2 border-slate-900 text-slate-900 px-6 py-4 rounded-[1.8rem] font-bold text-[10px] uppercase tracking-wide focus:ring-4 focus:ring-gold/20 outline-none transition-all cursor-pointer shadow-md leading-relaxed">
-                            <option value="pelaksana">Jabatan Pelaksana, Pengawas, Administrator, JF Muda/Pertama, Keterampilan</option>
-                            <option value="madya">Jabatan Fungsional Ahli Madya</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Video Panduan Section (Baru) -->
-        <div id="video-section" class="mb-20 animate-fade">
-            <div class="max-w-5xl mx-auto bg-slate-900 rounded-[3.5rem] p-4 md:p-10 shadow-2xl relative overflow-hidden border-4 border-gold/20">
-                <div class="flex flex-col md:flex-row items-center justify-between mb-8 px-4 gap-4">
-                    <div class="text-left">
-                        <span class="text-gold font-black text-[10px] tracking-[0.3em] uppercase block mb-1">Visual Guide</span>
-                        <h2 id="video-title" class="text-white text-2xl md:text-3xl font-black uppercase tracking-tighter">Video Tutorial Pengajuan</h2>
-                    </div>
-                    <div class="bg-white/10 px-6 py-3 rounded-2xl flex items-center gap-3">
-                        <div class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></div>
-                        <span id="video-badge" class="text-[10px] font-bold text-white uppercase tracking-widest">Tutorial Pelaksana</span>
-                    </div>
-                </div>
-                <div class="video-container shadow-2xl bg-black/40">
-                    <!-- Iframe akan diisi oleh JavaScript -->
-                    <iframe id="main-video" src="" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                </div>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-            <!-- Kolom Visual Alur -->
-            <div class="lg:col-span-7 space-y-4" id="flow-content"></div>
-
-            <!-- Kolom Samping -->
-            <div class="lg:col-span-5 space-y-8">
-                <!-- Target Mutu Waktu -->
-                <div class="bg-mesh rounded-[3rem] p-10 text-white shadow-2xl relative overflow-hidden group">
-                    <div class="relative z-10 text-left">
-                        <div class="flex items-center gap-3 mb-6">
-                             <div class="w-10 h-10 rounded-xl bg-gold/20 flex items-center justify-center border border-gold/30">
-                                 <i class="fas fa-history text-gold"></i>
-                             </div>
-                             <span class="text-[10px] font-black text-gold uppercase tracking-[0.3em] block">Target Mutu Waktu</span>
-                        </div>
-                        <div class="flex items-baseline gap-2">
-                            <span class="text-7xl font-black tracking-tighter" id="display-time">H-5</span>
-                            <span class="text-lg font-bold text-slate-400 italic uppercase">Hari Kerja</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Checklist Mandiri -->
-                <div class="bento-card bg-emerald-900 rounded-[3.5rem] p-10 text-white shadow-xl relative overflow-hidden">
-                    <h3 class="text-xl font-black mb-6 flex items-center gap-3 uppercase tracking-tighter text-left">
-                        <i class="fas fa-clipboard-check text-gold"></i> Checklist Berkas
-                    </h3>
-                    <div class="space-y-4 text-left font-medium" id="checklist-content"></div>
-                </div>
-
-                <!-- Unduh Formulir -->
-                <div class="bento-card bg-white border-4 border-amber-500 p-10 rounded-[3.5rem] text-center shadow-2xl relative overflow-hidden">
-                    <div class="w-16 h-16 bg-amber-100 rounded-2xl flex items-center justify-center text-amber-600 mx-auto mb-6 shadow-inner">
-                        <i class="fas fa-file-pdf text-3xl"></i>
-                    </div>
-                    <h4 class="text-xl font-black text-slate-900 mb-4 uppercase tracking-tighter">Pusat Formulir</h4>
-                    <p class="text-sm text-slate-600 mb-10 leading-relaxed font-bold italic">"Unduh dokumen persyaratan resmi melalui link di bawah ini."</p>
-                    <a href="https://drive.google.com/drive/u/0/folders/1KGmfZeg5sUweOWVz7tYEFE2K1akv7m4D" target="_blank" class="block w-full bg-amber-500 hover:bg-amber-600 text-white py-6 rounded-[2rem] font-black text-sm uppercase tracking-[0.2em] shadow-[0_15px_30px_-5px_rgba(245,158,11,0.5)] transition-all transform hover:scale-[1.03]">
-                        <i class="fas fa-cloud-arrow-down mr-2 text-lg"></i> Buka Google Drive
+        <!-- SECTION: HOME -->
+        <section id="home" class="content-section active">
+            <div class="text-center mb-24 max-w-4xl mx-auto">
+                <span class="px-8 py-3 rounded-full bg-gold/10 border border-gold/20 text-gold text-[10px] font-black uppercase tracking-[0.6em] mb-10 inline-block">Official Kepegawaian Portal</span>
+                <h1 class="text-7xl lg:text-[10rem] font-black tracking-tighter uppercase leading-[0.8] text-white">
+                    Digital <br><span class="gradient-text">TRANSFORM</span>
+                </h1>
+                <p class="text-slate-400 font-bold text-xl lg:text-3xl mt-14 leading-snug">
+                    Standardisasi prosedur pengelolaan cuti ASN BBPK APDN IV Makassar dalam satu platform terpadu.
+                </p>
+                <div class="mt-16 flex flex-wrap justify-center gap-6">
+                    <a href="https://drive.google.com/drive/u/0/folders/1KGmfZeg5sUweOWVz7tYEFE2K1akv7m4D" target="_blank" class="btn-gold-glow inline-flex items-center gap-4 px-10 py-6 rounded-full text-primary font-black uppercase text-[10px] tracking-widest shadow-2xl">
+                        <i class="fas fa-download text-lg"></i> Unduh Formulir Cuti
+                    </a>
+                    <a href="https://drive.google.com/file/d/1TY7-D4mZzbMkCDHQzA1vIyfS33f40Pk7/view?usp=sharing" target="_blank" class="bg-white/10 hover:bg-white/20 border border-white/20 inline-flex items-center gap-4 px-10 py-6 rounded-full text-white font-black uppercase text-[10px] tracking-widest shadow-2xl transition-all">
+                        <i class="fas fa-file-pdf text-lg text-rose-500"></i> Unduh Dokumen SOP
                     </a>
                 </div>
+            </div>
 
-                <div class="p-8 bg-blue-50 rounded-[3rem] border border-blue-100 shadow-sm text-left">
-                    <h4 class="text-[11px] font-black text-blue-900 uppercase tracking-widest mb-6 text-center">Pusat Informasi & FAQ</h4>
-                    <div class="space-y-3">
-                        <details class="group bg-white p-4 rounded-2xl border border-blue-100 cursor-pointer">
-                            <summary class="text-[11px] font-bold text-slate-700 uppercase tracking-wide list-none flex justify-between items-center">
-                                Berapa lama proses verifikasi? <i class="fas fa-plus text-[10px] text-blue-300 group-open:rotate-45 transition-transform"></i>
-                            </summary>
-                            <p class="text-[11px] text-slate-500 mt-3 leading-relaxed font-medium">Verifikasi internal di tingkat Balai maksimal dilakukan dalam 2 hari kerja setelah berkas lengkap diterima.</p>
-                        </details>
-                        
-                        <details class="group bg-white p-4 rounded-2xl border border-blue-100 cursor-pointer">
-                            <summary class="text-[11px] font-bold text-slate-700 uppercase tracking-wide list-none flex justify-between items-center">
-                                Bagaimana Jika Cuti Sakit Mendadak? <i class="fas fa-plus text-[10px] text-blue-300 group-open:rotate-45 transition-transform"></i>
-                            </summary>
-                            <p class="text-[11px] text-slate-500 mt-3 leading-relaxed font-medium">Segera lapor via WhatsApp ke Atasan Langsung & Subbag SDM. Berkas fisik/Surat Keterangan Dokter menyusul segera setelah kondisi memungkinkan.</p>
-                        </details>
-
-                        <details class="group bg-white p-4 rounded-2xl border border-blue-100 cursor-pointer">
-                            <summary class="text-[11px] font-bold text-slate-700 uppercase tracking-wide list-none flex justify-between items-center">
-                                Syarat CAP (Cuti Alasan Penting)? <i class="fas fa-plus text-[10px] text-blue-300 group-open:rotate-45 transition-transform"></i>
-                            </summary>
-                            <p class="text-[11px] text-slate-500 mt-3 leading-relaxed font-medium">Mencakup pernikahan pertama, musibah keluarga inti, atau urusan darurat. Wajib melampirkan bukti autentik asli (Surat Nikah/Surat Keterangan).</p>
-                        </details>
-
-                        <details class="group bg-white p-4 rounded-2xl border border-blue-100 cursor-pointer">
-                            <summary class="text-[11px] font-bold text-slate-700 uppercase tracking-wide list-none flex justify-between items-center">
-                                Cuti bagi CPNS / Pegawai Baru? <i class="fas fa-plus text-[10px] text-blue-300 group-open:rotate-45 transition-transform"></i>
-                            </summary>
-                            <p class="text-[11px] text-slate-500 mt-3 leading-relaxed font-medium">Sesuai aturan BKN, Cuti Tahunan hanya diberikan setelah 1 tahun bekerja secara terus-menerus. Cuti Sakit tetap dapat diberikan sesuai kebutuhan medis.</p>
-                        </details>
+            <!-- Bento Home Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-32">
+                <div onclick="showSection('alur')" class="card-vibrant p-12 rounded-[4.5rem] group cursor-pointer border-t-8 border-accent-blue">
+                    <div class="w-20 h-20 bg-accent-blue rounded-3xl flex items-center justify-center text-3xl mb-10 text-white shadow-2xl shadow-blue-500/20">
+                        <i class="fas fa-route"></i>
                     </div>
+                    <h3 class="text-3xl font-black text-white uppercase mb-4 tracking-tighter">Prosedur</h3>
+                    <p class="text-sm text-slate-400 font-bold leading-relaxed">Panduan langkah demi langkah verifikasi berkas sesuai dokumen SOP resmi.</p>
+                </div>
+                <div onclick="showSection('video')" class="card-vibrant p-12 rounded-[4.5rem] group cursor-pointer border-t-8 border-gold">
+                    <div class="w-20 h-20 bg-gold rounded-3xl flex items-center justify-center text-3xl mb-10 text-primary shadow-2xl shadow-gold/20">
+                        <i class="fas fa-film"></i>
+                    </div>
+                    <h3 class="text-3xl font-black text-white uppercase mb-4 tracking-tighter">Tutorial</h3>
+                    <p class="text-sm text-slate-400 font-bold leading-relaxed">Video panduan visual yang menjelaskan tahapan alur Standar Operasional Prosedur (SOP) pengajuan cuti.</p>
+                </div>
+                <div onclick="showSection('faq')" class="card-vibrant p-12 rounded-[4.5rem] group cursor-pointer border-t-8 border-accent-emerald">
+                    <div class="w-20 h-20 bg-accent-emerald rounded-3xl flex items-center justify-center text-3xl mb-10 text-white shadow-2xl shadow-emerald-500/20">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="text-3xl font-black text-white uppercase mb-4 tracking-tighter">Bantuan</h3>
+                    <p class="text-sm text-slate-400 font-bold leading-relaxed">Pusat informasi teknis mengenai regulasi cuti dan kendala administrasi.</p>
                 </div>
             </div>
-        </div>
 
-        <!-- Seksi Kontak -->
-        <section class="mt-20 max-w-5xl mx-auto bg-white border border-slate-200 rounded-[4rem] p-12 shadow-2xl relative overflow-hidden text-left">
-            <div class="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
-                <i class="fas fa-comments text-9xl text-blue-900"></i>
-            </div>
-            <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-10">
-                <div class="flex items-center gap-8">
-                    <div class="w-20 h-20 bg-gradient-to-br from-blue-900 to-slate-800 rounded-3xl flex items-center justify-center text-white text-3xl shadow-xl ring-4 ring-blue-50">
-                        <i class="fas fa-headset text-gold"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-2xl font-black text-slate-900 uppercase tracking-tight mb-2">Butuh Konsultasi?</h3>
-                        <p class="text-slate-600 text-base font-semibold leading-relaxed">Subbag SDM & Umum BBPK APDN IV Makassar <br>siap membantu kendala administrasi Anda.</p>
-                    </div>
+            <!-- Core Values ASN -->
+            <div class="card-vibrant p-16 rounded-[5rem] relative overflow-hidden border-white/5">
+                <div class="text-center mb-20">
+                    <h4 class="text-gold font-black text-[12px] uppercase tracking-[1em] mb-4">ASN CORE VALUES</h4>
+                    <h2 class="text-5xl font-black text-white tracking-tighter uppercase">BerAKHLAK</h2>
                 </div>
-                <div class="bg-slate-50 p-6 rounded-[2.5rem] border border-slate-200 text-center md:text-right shrink-0">
-                    <span class="text-[11px] font-black text-blue-600 uppercase tracking-widest block mb-1">WAKTU LAYANAN</span>
-                    <p class="text-xl font-black text-slate-900 tracking-tight uppercase">Senin - Jumat</p>
-                    <p class="text-sm font-bold text-slate-500 uppercase tracking-tighter">08:00 - 16:00 WITA</p>
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-8 text-center">
+                    <div class="flex flex-col items-center gap-4 group">
+                        <div class="w-20 h-20 rounded-[1.8rem] bg-accent-blue/10 border border-accent-blue/20 flex items-center justify-center text-accent-blue text-2xl group-hover:scale-110 transition-transform"><i class="fas fa-user-check"></i></div>
+                        <span class="text-[8px] font-black uppercase text-slate-500 tracking-widest leading-tight">Berorientasi<br>Pelayanan</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-4 text-accent-amber group">
+                        <div class="w-20 h-20 rounded-[1.8rem] bg-accent-amber/10 border border-accent-amber/20 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform"><i class="fas fa-balance-scale"></i></div>
+                        <span class="text-[8px] font-black uppercase tracking-widest leading-tight">Akuntabel</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-4 text-accent-emerald group">
+                        <div class="w-20 h-20 rounded-[1.8rem] bg-accent-emerald/10 border border-accent-emerald/20 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform"><i class="fas fa-graduation-cap"></i></div>
+                        <span class="text-[8px] font-black uppercase tracking-widest leading-tight">Kompeten</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-4 text-rose-500 group">
+                        <div class="w-20 h-20 rounded-[1.8rem] bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform"><i class="fas fa-heart"></i></div>
+                        <span class="text-[8px] font-black uppercase tracking-widest leading-tight">Harmonis</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-4 text-indigo-400 group">
+                        <div class="w-20 h-20 rounded-[1.8rem] bg-indigo-400/10 border border-indigo-400/20 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform"><i class="fas fa-medal"></i></div>
+                        <span class="text-[8px] font-black uppercase tracking-widest leading-tight">Loyal</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-4 text-sky-400 group">
+                        <div class="w-20 h-20 rounded-[1.8rem] bg-sky-400/10 border border-sky-400/20 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform"><i class="fas fa-sync-alt"></i></div>
+                        <span class="text-[8px] font-black uppercase tracking-widest leading-tight">Adaptif</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-4 text-white group">
+                        <div class="w-20 h-20 rounded-[1.8rem] bg-white/10 border border-white/20 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform"><i class="fas fa-handshake"></i></div>
+                        <span class="text-[8px] font-black uppercase tracking-widest leading-tight">Kolaboratif</span>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Seksi BerAKHLAK -->
-        <section class="mt-24 max-w-7xl mx-auto text-center">
-            <h4 class="text-center text-[10px] font-black text-slate-400 uppercase tracking-[0.5em] mb-12">Core Values ASN</h4>
-            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
-                <div class="akhlak-badge bg-blue-50/50 p-6 rounded-[2rem]">
-                    <i class="fas fa-hands-holding-child text-blue-600 text-xl mb-3 block"></i>
-                    <span class="text-[9px] font-black uppercase text-blue-900">Berorientasi Pelayanan</span>
+        <!-- SECTION: ALUR SOP -->
+        <section id="alur" class="content-section">
+            <div class="grid grid-cols-1 xl:grid-cols-12 gap-16">
+                <!-- Sidebar Controls -->
+                <div class="xl:col-span-4 space-y-10">
+                    <div class="card-vibrant p-12 rounded-[4.5rem] border-gold/30">
+                        <label class="text-[10px] font-black text-gold uppercase tracking-[0.8em] block mb-10 text-center">Filter Layanan</label>
+                        <div class="space-y-4">
+                            <button onclick="updateType('tahunan')" id="btn-tahunan" class="w-full py-6 rounded-3xl font-black text-[11px] uppercase transition-all shadow-xl">Cuti Tahunan & Cuti Sakit</button>
+                            <button onclick="updateType('penting')" id="btn-penting" class="w-full py-6 rounded-3xl font-black text-[11px] uppercase transition-all shadow-xl">Cuti Alasan Penting & Cuti Melahirkan</button>
+                        </div>
+                        <div class="mt-14 pt-10 border-t border-white/5 text-center">
+                            <label class="text-[10px] font-black text-slate-500 uppercase tracking-[0.5em] block mb-6">Pilih Jabatan</label>
+                            <select onchange="updateRole(this.value)" id="select-role" class="w-full p-5 rounded-2xl bg-white/5 border border-white/10 text-white font-bold text-[11px] uppercase outline-none focus:border-gold">
+                                <option value="pelaksana">Jabatan Pelaksana, JF Ahli Muda Ke Bawah, Administrator, Pengawas, dan Keterampilan</option>
+                                <option value="madya">Jabatan Ahli Madya (JF)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="bg-blue-900/40 border border-blue-500/30 p-12 rounded-[4.5rem] text-white">
+                        <h4 class="font-black text-[13px] uppercase tracking-widest mb-10 text-blue-400 flex items-center gap-5">
+                            <i class="fas fa-file-invoice-dollar text-2xl"></i> Berkas Wajib
+                        </h4>
+                        <div id="checklist-render" class="space-y-4 font-bold text-[11px]"></div>
+                        
+                        <!-- Unduh Buttons inside Checklist -->
+                        <div class="mt-12 pt-10 border-t border-white/10 space-y-4">
+                            <a href="https://drive.google.com/drive/u/0/folders/1KGmfZeg5sUweOWVz7tYEFE2K1akv7m4D" target="_blank" class="w-full btn-gold-glow flex items-center justify-center gap-3 py-5 rounded-2xl text-primary font-black uppercase text-[10px] tracking-widest shadow-xl">
+                                <i class="fas fa-file-download text-sm"></i> Unduh Form Cuti
+                            </a>
+                            <a href="https://drive.google.com/file/d/1TY7-D4mZzbMkCDHQzA1vIyfS33f40Pk7/view?usp=sharing" target="_blank" class="w-full bg-white/5 border border-white/10 flex items-center justify-center gap-3 py-5 rounded-2xl text-white font-black uppercase text-[10px] tracking-widest hover:bg-white/10 transition-all">
+                                <i class="fas fa-file-pdf text-sm text-rose-500"></i> Lihat SOP Resmi
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <div class="akhlak-badge bg-amber-50/50 p-6 rounded-[2rem]">
-                    <i class="fas fa-balance-scale text-amber-600 text-xl mb-3 block"></i>
-                    <span class="text-[9px] font-black uppercase text-amber-900">Akuntabel</span>
+
+                <!-- Interactive Flow Steps -->
+                <div class="xl:col-span-8 space-y-12">
+                    <div class="card-vibrant p-12 lg:p-20 rounded-[5rem] relative overflow-hidden">
+                        <div class="flex flex-col md:flex-row justify-between items-center mb-24 gap-12 text-center md:text-left">
+                            <div>
+                                <h2 class="text-6xl font-black text-white uppercase tracking-tighter mb-4" id="title-render">Memuat...</h2>
+                                <span class="px-6 py-2 rounded-full bg-emerald-500/10 text-emerald-400 text-[10px] font-black uppercase tracking-widest border border-emerald-500/20">SOP Resmi 2026</span>
+                            </div>
+                            <div class="bg-gradient-to-br from-gold to-gold-bright p-8 rounded-[3rem] text-primary shadow-2xl min-w-[14rem] text-center">
+                                <span class="text-[10px] font-black uppercase tracking-widest mb-1 block opacity-80">Mutu Baku</span>
+                                <div class="text-6xl font-black tracking-tighter" id="time-render">H-5</div>
+                                <span class="text-[9px] font-black uppercase tracking-widest opacity-80">Minimal Hari Kerja</span>
+                            </div>
+                        </div>
+
+                        <!-- Combined Step + Narrative Rendering -->
+                        <div id="flow-render" class="space-y-12 relative"></div>
+                    </div>
                 </div>
-                <div class="akhlak-badge bg-emerald-50/50 p-6 rounded-[2rem]">
-                    <i class="fas fa-book-open-reader text-emerald-600 text-xl mb-3 block"></i>
-                    <span class="text-[9px] font-black uppercase text-emerald-900">Kompeten</span>
+            </div>
+        </section>
+
+        <!-- SECTION: VIDEO -->
+        <section id="video" class="content-section">
+            <div class="max-w-6xl mx-auto card-vibrant p-12 lg:p-24 rounded-[6rem] border-gold/30">
+                <div class="flex flex-col lg:flex-row items-center justify-between mb-24 gap-12 text-center lg:text-left">
+                    <div>
+                        <span class="text-gold font-black text-[12px] uppercase tracking-[1em] mb-4 block">Visualisasi Alur SOP</span>
+                        <h2 class="text-6xl font-black text-white uppercase tracking-tighter leading-none">Video Prosedur</h2>
+                        <p class="text-slate-400 font-bold text-sm mt-4 max-w-xl">Simak visualisasi langkah-langkah birokrasi pengajuan cuti untuk memastikan pemahaman tahapan alur prosedur yang benar sesuai regulasi.</p>
+                    </div>
+                    <div class="flex bg-white/5 p-4 rounded-[3rem] border border-white/10 ring-1 ring-gold/10 overflow-hidden">
+                        <button onclick="updateRole('pelaksana')" id="v-pel-btn" class="px-10 py-6 rounded-[2.5rem] font-black text-[10px] uppercase transition-all shrink-0">JABATAN PELAKSANA, JF AHLI MUDA KE BAWAH, ADMINISTRATOR, PENGAWAS, DAN KETERAMPILAN</button>
+                        <button onclick="updateRole('madya')" id="v-mad-btn" class="px-10 py-6 rounded-[2.5rem] font-black text-[10px] uppercase transition-all shrink-0">AHLI MADYA</button>
+                    </div>
                 </div>
-                <div class="akhlak-badge bg-rose-50/50 p-6 rounded-[2rem]">
-                    <i class="fas fa-people-group text-rose-600 text-xl mb-3 block"></i>
-                    <span class="text-[9px] font-black uppercase text-rose-900">Harmonis</span>
+
+                <div class="rounded-[5rem] overflow-hidden shadow-[0_60px_120px_-30px_rgba(0,0,0,0.9)] aspect-video bg-black ring-1 ring-white/10">
+                    <iframe id="video-frame" src="" frameborder="0" allowfullscreen class="w-full h-full"></iframe>
                 </div>
-                <div class="akhlak-badge bg-purple-50/50 p-6 rounded-[2rem]">
-                    <i class="fas fa-award text-purple-600 text-xl mb-3 block"></i>
-                    <span class="text-[9px] font-black uppercase text-purple-900">Loyal</span>
+            </div>
+        </section>
+
+        <!-- SECTION: WAKTU -->
+        <section id="waktu" class="content-section">
+            <div class="text-center mb-32">
+                <h2 class="text-7xl font-black text-white uppercase tracking-tighter">Ketentuan Waktu</h2>
+                <p class="text-gold font-bold text-[12px] tracking-[1.4em] uppercase mt-6">Target Mutu Pengajuan Minimal</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-14 max-w-6xl mx-auto">
+                <div class="card-vibrant p-16 rounded-[6rem] text-center border-t-[20px] border-accent-blue group">
+                    <div class="text-9xl font-black text-accent-blue/10 group-hover:text-accent-blue transition-colors mb-10">H-5</div>
+                    <h3 class="text-4xl font-black text-white uppercase mb-4 tracking-tighter">Pelaksana, JF Ahli Muda Ke Bawah, Administrator, Pengawas, Keterampilan</h3>
+                    <p class="text-[11px] text-slate-500 font-black uppercase tracking-[0.4em] leading-relaxed">Tahunan & Sakit<br>Proses Internal Balai</p>
                 </div>
-                <div class="akhlak-badge bg-sky-50/50 p-6 rounded-[2rem]">
-                    <i class="fas fa-arrows-rotate text-sky-600 text-xl mb-3 block"></i>
-                    <span class="text-[9px] font-black uppercase text-sky-900">Adaptif</span>
+                <div class="bg-primary/90 border border-gold/40 p-16 rounded-[6rem] text-center border-t-[20px] border-gold shadow-3xl scale-110 relative z-10">
+                    <div class="text-9xl font-black text-gold/20 mb-10">H-7</div>
+                    <h3 class="text-4xl font-black text-white uppercase mb-4 tracking-tighter">Ahli Madya</h3>
+                    <p class="text-[11px] text-gold/60 font-black uppercase tracking-[0.4em] leading-relaxed">Tahunan & Sakit Madya<br>Usulan via SRIKANDI</p>
                 </div>
-                <div class="akhlak-badge bg-indigo-50/50 p-6 rounded-[2rem]">
-                    <i class="fas fa-handshake text-indigo-600 text-xl mb-3 block"></i>
-                    <span class="text-[9px] font-black uppercase text-indigo-900">Kolaboratif</span>
+                <div class="card-vibrant p-16 rounded-[6rem] text-center border-t-[20px] border-accent-amber group">
+                    <div class="text-9xl font-black text-accent-amber/10 group-hover:text-accent-amber transition-colors mb-10">H-12</div>
+                    <h3 class="text-4xl font-black text-white uppercase mb-4 tracking-tighter">Penting</h3>
+                    <p class="text-[11px] text-slate-500 font-black uppercase tracking-[0.4em] leading-relaxed">Cuti Alasan Penting & Melahirkan<br>Proses Biro SDM Pusat</p>
                 </div>
+            </div>
+        </section>
+
+        <!-- SECTION: FAQ -->
+        <section id="faq" class="content-section">
+            <div class="max-w-4xl mx-auto space-y-10">
+                <div class="text-center mb-24">
+                    <h2 class="text-8xl font-black text-white uppercase tracking-tighter">Bantuan</h2>
+                    <p class="text-gold font-bold text-[12px] tracking-[1.2em] uppercase mt-6">Tanya Jawab Teknis</p>
+                </div>
+                
+                <!-- FAQ Item 1 -->
+                <details class="group card-vibrant p-14 rounded-[4.5rem] cursor-pointer">
+                    <summary class="list-none flex justify-between items-center font-black text-lg uppercase tracking-[0.2em] text-white">
+                        <span>Siapa yang memeriksa permohonan cuti?</span>
+                        <div class="w-16 h-16 bg-white/5 rounded-[2rem] flex items-center justify-center group-open:rotate-45 transition-transform border border-white/10">
+                            <i class="fas fa-plus text-gold"></i>
+                        </div>
+                    </summary>
+                    <div class="mt-12 text-lg text-slate-400 font-bold leading-relaxed border-t border-white/5 pt-12">
+                        Permohonan cuti akan diperiksa dan diverifikasi oleh Subbag SDM dan Umum sebelum diteruskan kepada pejabat yang berwenang.
+                    </div>
+                </details>
+
+                <!-- FAQ Item 2 -->
+                <details class="group card-vibrant p-14 rounded-[4.5rem] cursor-pointer">
+                    <summary class="list-none flex justify-between items-center font-black text-lg uppercase tracking-[0.2em] text-white">
+                        <span>Apa yang terjadi jika administrasi cuti tidak lengkap?</span>
+                        <div class="w-16 h-16 bg-white/5 rounded-[2rem] flex items-center justify-center group-open:rotate-45 transition-transform border border-white/10">
+                            <i class="fas fa-plus text-gold"></i>
+                        </div>
+                    </summary>
+                    <div class="mt-12 text-lg text-slate-400 font-bold leading-relaxed border-t border-white/5 pt-12">
+                        Jika administrasi tidak lengkap, maka berkas akan dikembalikan kepada pegawai untuk dilengkapi.
+                    </div>
+                </details>
+
+                <!-- FAQ Item 3 -->
+                <details class="group card-vibrant p-14 rounded-[4.5rem] cursor-pointer">
+                    <summary class="list-none flex justify-between items-center font-black text-lg uppercase tracking-[0.2em] text-white">
+                        <span>Apa yang dilakukan pegawai jika mengalami kondisi mendadak seperti sakit atau keadaan darurat?</span>
+                        <div class="w-16 h-16 bg-white/5 rounded-[2rem] flex items-center justify-center group-open:rotate-45 transition-transform border border-white/10">
+                            <i class="fas fa-plus text-gold"></i>
+                        </div>
+                    </summary>
+                    <div class="mt-12 text-lg text-slate-400 font-bold leading-relaxed border-t border-white/5 pt-12">
+                        Pegawai wajib melaporkan sejak hari pertama kepada unit terkait agar Subbag SDM dan Umum dapat mengajukan surat izin sementara pada hari yang sama.
+                    </div>
+                </details>
+
+                <!-- FAQ Item 4 (Original) -->
+                <details class="group card-vibrant p-14 rounded-[4.5rem] cursor-pointer">
+                    <summary class="list-none flex justify-between items-center font-black text-lg uppercase tracking-[0.2em] text-white">
+                        <span>Hak sisa cuti tahunan?</span>
+                        <div class="w-16 h-16 bg-white/5 rounded-[2rem] flex items-center justify-center group-open:rotate-45 transition-transform border border-white/10">
+                            <i class="fas fa-plus text-gold"></i>
+                        </div>
+                    </summary>
+                    <div class="mt-12 text-lg text-slate-400 font-bold leading-relaxed border-t border-white/5 pt-12">
+                        Sisa jatah cuti tahun berjalan dapat digunakan di tahun berikutnya paling banyak 6 hari kerja. Akumulasi maksimal sisa cuti adalah 18 hari kerja dalam satu tahun kalender.
+                    </div>
+                </details>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="mt-32 border-t border-slate-200 bg-white py-20 text-slate-900 relative">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <div class="mb-12 flex flex-col items-center">
-                <img src="LOGO_BBPK_APDN_IV-removebg-preview (1).png" alt="Logo BBPK" class="h-20 w-auto object-contain mb-8 grayscale hover:grayscale-0 transition-all opacity-50 hover:opacity-100">
-                <div class="w-12 h-1.5 bg-gold rounded-full mb-8"></div>
-                <h4 class="text-3xl font-black tracking-tighter uppercase mb-2 text-blue-900">Balai Besar Pengembangan Kompetensi</h4>
-                <p class="text-gold font-black tracking-[0.4em] text-sm uppercase">APARATUR PEMERINTAHAN DALAM NEGERI IV MAKASSAR</p>
-                
-                <div class="flex flex-col md:flex-row gap-6 text-[11px] font-bold text-slate-500 uppercase tracking-widest mt-6">
-                    <span class="flex items-center gap-2"><i class="fas fa-location-dot text-gold"></i> Paccerakkang No.3, Kec. Biringkanaya, Kota Makassar</span>
-                    <span class="hidden md:block">|</span>
-                    <span class="flex items-center gap-2"><i class="fas fa-envelope text-gold"></i> kepegawaianbbpkapdn@gmail.com</span>
-                </div>
-            </div>
-            
-            <div class="pt-8 border-t border-slate-100">
-                <p class="text-[10px] font-black text-slate-300 uppercase tracking-[0.8em]">© 2026 KEMENTERIAN DALAM NEGERI - REPUBLIK INDONESIA</p>
-            </div>
-        </div>
+    <footer class="pb-24 text-center opacity-30">
+        <p class="text-[9px] font-black uppercase tracking-[0.8em] text-white">© 2026 KEMENTERIAN DALAM NEGERI - BBPK APDN IV MAKASSAR</p>
     </footer>
 
     <script>
@@ -338,125 +439,150 @@
         const sopData = {
             tahunan: {
                 pelaksana: {
+                    title: "Cuti Tahunan & Cuti Sakit",
                     time: "H-5",
-                    videoUrl: "https://www.youtube.com/embed/CnBwAiQPwl4", 
-                    videoLabel: "Tutorial Pelaksana",
+                    videoUrl: "https://www.youtube.com/embed/OoZrTzH8v_E",
                     requirements: ["Formulir Permintaan Cuti", "Surat Keterangan Dokter (Cuti Sakit)"],
                     steps: [
-                        { role: "Pegawai / Pemohon", desc: "Menyerahkan berkas fisik ke Subbag SDM & Umum secara manual.", icon: "fa-user-pen", color: "blue" },
-                        { role: "Subbag SDM & Umum", desc: "Verifikasi administrasi dan kelengkapan berkas fisik.", icon: "fa-clipboard-check", color: "blue" },
-                        { role: "Kasubag SDM", desc: "Verifikasi berjenjang dan pemberian paraf persetujuan manual.", icon: "fa-user-check", color: "gold" },
-                        { role: "Kabag TU", desc: "Verifikasi struktural akhir dan pemberian paraf manajerial.", icon: "fa-user-shield", color: "gold" },
-                        { role: "Kepala Balai", desc: "Penandatanganan Surat Cuti sah sebagai keputusan akhir.", icon: "fa-file-signature", color: "emerald" }
+                        { role: "Pegawai / Pemohon", desc: "Penyerahan berkas permohonan ke Subbag SDM & Umum.", detail: "Pegawai menyerahkan berkas permohonan Cuti Kepada Subbag SDM & Umum", icon: "fa-user-pen", color: "blue" },
+                        { role: "Subbag SDM & Umum", desc: "Verifikasi kelengkapan berkas fisik.", detail: "Subbag SDM & Umum memeriksa kelengkapan berkas permohonan Surat Cuti, jika tidak lengkap maka dikembalikan kepada pemohon untuk diperbaiki, jika lengkap maka berkas permohonan diserahkan kepada Kasubag SDM & Umum", icon: "fa-clipboard-check", color: "indigo" },
+                        { role: "Kasubag SDM & Umum", desc: "Pemeriksaan & paraf persetujuan.", detail: "Kasubag SDM & Umum memeriksa berkas permohonan cuti, jika disetujui maka di paraf dan disampaikan kepada Kabag TU", icon: "fa-user-check", color: "amber" },
+                        { role: "Kabag TU", desc: "Verifikasi struktural & paraf manajerial.", detail: "Kabag TU Memeriksa berkas permohonan cuti, jika disetujui maka di paraf dan disampaikan kepada Kepala BBPK APDN IV", icon: "fa-shield-halved", color: "amber" },
+                        { role: "Kepala BBPK APDN IV", desc: "Penandatanganan & Penyerahan Berkas.", detail: "Kepala BBPK APDN IV memeriksa berkas permohonan cuti dan ditandatangani, kemudian berkas permohonan cuti disampaikan kepada pemohon", icon: "fa-signature", color: "emerald" }
                     ]
                 },
                 madya: {
+                    title: "Cuti Tahunan & Cuti Sakit (Madya)",
                     time: "H-7",
-                    videoUrl: "https://www.youtube.com/embed/7eMwl8GVcZQ", 
-                    videoLabel: "Tutorial Ahli Madya",
-                    requirements: ["Formulir Permintaan Cuti (Ahli Madya)", "Surat Keterangan Dokter (Cuti Sakit)"],
+                    videoUrl: "https://www.youtube.com/embed/gRjL8jlVMYo",
+                    requirements: ["Formulir Cuti Madya", "Surat Keterangan Dokter", "Dokumen Rekomendasi"],
                     steps: [
-                        { role: "Pemohon (JF Ahli Madya)", desc: "Menyerahkan berkas permohonan ke unit kepegawaian Balai.", icon: "fa-user-tie", color: "blue" },
-                        { role: "Internal Balai", desc: "Verifikasi dan paraf berjenjang secara manual oleh struktural.", icon: "fa-list-check", color: "blue" },
-                        { role: "Kepala Balai", desc: "Penandatanganan berkas fisik selaku Atasan Langsung.", icon: "fa-signature", color: "gold" },
-                        { role: "Unit SDM", desc: "Menyusun surat pengantar usulan resmi ke tingkat pusat (BPSDM).", icon: "fa-file-lines", color: "gold" },
-                        { role: "Pusat (BPSDM)", desc: "Pengesahan cuti secara resmi oleh pejabat berwenang pusat.", icon: "fa-stamp", color: "emerald" }
+                        { role: "Pegawai / Pemohon", desc: "Penyerahan berkas permohonan ke Subbag SDM & Umum.", detail: "Pegawai menyerahkan berkas permohonan Cuti Kepada Subbag SDM & Umum", icon: "fa-user-tie", color: "blue" },
+                        { role: "Subbag SDM & Umum", desc: "Verifikasi administrasi berjenjang.", detail: "Subbag SDM & Umum memeriksa kelengkapan berkas permohonan Surat Cuti, jika tidak lengkap maka dikembalikan kepada pemohon untuk diperbaiki, jika lengkap maka berkas permohonan diserahkan kepada Kasubag SDM & Umum", icon: "fa-clipboard-check", color: "indigo" },
+                        { role: "Kasubag SDM & Umum", desc: "Paraf persetujuan struktural.", detail: "Kasubag SDM & Umum Memeriksa berkas permohonan cuti, jika disetujui maka di paraf dan disampaikan kepada Kabag TU", icon: "fa-user-check", color: "amber" },
+                        { role: "Kabag TU", desc: "Paraf verifikasi manajerial.", detail: "Kabag TU Memeriksa berkas permohonan cuti, jika disetujui maka di paraf dan disampaikan kepada Kepala BBPK APDN IV Selaku Atasan Langsung", icon: "fa-shield-halved", color: "amber" },
+                        { role: "Kepala BBPK APDN IV", desc: "Penandatanganan berkas selaku atasan langsung.", detail: "Kepala BBPK APDN IV memeriksa berkas permohonan cuti, jika disetujui maka ditandatangani oleh Kepala BBPK APDN IV Selaku Atasan Langsung", icon: "fa-signature", color: "emerald" },
+                        { role: "Subbag SDM & Umum", desc: "Penyusunan surat pengantar khusus via SRIKANDI.", detail: "Subbag SDM dan Umum menyusun surat pengantar usulan cuti melalui aplikasi SRIKANDI yang ditujukan kepada Sekretaris BPSDM selaku pejabat yang berwenang menandatangani atas nama Kepala BPSDM terkait cuti tahunan dan cuti sakit bagi PNS yang menduduki Jabatan Fungsional Ahli Madya", icon: "fa-paper-plane", color: "emerald" }
                     ]
                 }
             },
             penting: {
                 pelaksana: {
+                    title: "Cuti Alasan Penting & Cuti Melahirkan",
                     time: "H-12",
-                    videoUrl: "https://www.youtube.com/embed/CnBwAiQPwl4",
-                    videoLabel: "Tutorial Pelaksana",
-                    requirements: ["Formulir CAP/Melahirkan", "Bukti Autentik Alasan Cuti (Surat Medis/Kematian)"],
+                    videoUrl: "https://www.youtube.com/embed/OoZrTzH8v_E",
+                    requirements: [
+                        "Formulir Permintaan Cuti",
+                        "Surat keterangan menikah atau undangan pernikahan",
+                        "Surat keterangan persalinan",
+                        "Surat keterangan pendampingan keluarga sakit atau bukti rawat inap",
+                        "Surat keterangan dari Ketua RT (khusus musibah/bencana)",
+                        "Surat keterangan kematian dari pihak berwenang"
+                    ],
                     steps: [
-                        { role: "Pegawai / Pemohon", desc: "Menyerahkan berkas & bukti fisik alasan cuti ke SDM.", icon: "fa-hospital-user", color: "blue" },
-                        { role: "Validasi Internal", desc: "Verifikasi manual berjenjang dari Subbag SDM hingga Kabag TU.", icon: "fa-folder-tree", color: "blue" },
-                        { role: "Kepala Balai", desc: "Tanda tangan berkas fisik selaku Atasan Langsung.", icon: "fa-pen-nib", color: "gold" },
-                        { role: "Biro SDM Pusat", desc: "Penyampaian usulan pengantar ke tingkat Biro SDM Kemendagri.", icon: "fa-building-columns", color: "gold" },
-                        { role: "Output Pusat", desc: "Persetujuan akhir dan penerbitan surat cuti resmi oleh pusat.", icon: "fa-circle-check", color: "emerald" }
+                        { role: "Pegawai / Pemohon", desc: "Penyerahan berkas permohonan ke Subbag SDM & Umum.", detail: "Pegawai menyerahkan berkas permohonan Cuti Kepada Subbag SDM & Umum", icon: "fa-user-pen", color: "blue" },
+                        { role: "Subbag SDM & Umum", desc: "Verifikasi kelengkapan berkas permohonan.", detail: "Subbag SDM & Umum memeriksa kelengkapan berkas permohonan Surat Cuti, jika tidak lengkap maka dikembalikan kepada pemohon untuk diperbaiki, jika lengkap maka berkas permohonan diserahkan kepada Kasubag SDM & Umum", icon: "fa-clipboard-check", color: "indigo" },
+                        { role: "Kasubag SDM & Umum", desc: "Pemeriksaan berkas & paraf Kasubag.", detail: "Kasubag SDM & Umum memeriksa berkas permohonan cuti, jika disetujui maka di paraf dan disampaikan kepada Kabag TU", icon: "fa-user-check", color: "amber" },
+                        { role: "Kabag TU", desc: "Paraf verifikasi oleh Kabag TU.", detail: "Kabag TU Memeriksa berkas permohonan cuti, jika disetujui maka di paraf dan disampaikan kepada Kepala BBPK APDN IV Selaku Atasan Langsung", icon: "fa-shield-halved", color: "amber" },
+                        { role: "Kepala BBPK APDN IV", desc: "Penandatanganan berkas selaku Atasan Langsung.", detail: "Kepala BBPK APDN IV memeriksa berkas permohonan cuti, jika disetujui maka ditandatangani Selaku Atasan Langsung", icon: "fa-signature", color: "emerald" },
+                        { role: "Subbag SDM & Umum", desc: "Penyampaian pengantar via SRIKANDI.", detail: "Subbag SDM dan Umum menyusun serta menyampaikan surat pengantar pengajuan cuti melalui aplikasi SRIKANDI kepada BPSDM untuk selanjutnya ditindaklanjuti oleh Biro SDM", icon: "fa-paper-plane", color: "emerald" }
                     ]
                 },
                 madya: {
+                    title: "Cuti Alasan Penting & Cuti Melahirkan (Madya)",
                     time: "H-12",
-                    videoUrl: "https://www.youtube.com/embed/7eMwl8GVcZQ",
-                    videoLabel: "Tutorial Ahli Madya",
-                    requirements: ["Formulir CAP/Melahirkan", "Bukti Autentik Penunjang (Asli)"],
+                    videoUrl: "https://www.youtube.com/embed/gRjL8jlVMYo",
+                    requirements: [
+                        "Formulir Permintaan Cuti",
+                        "Surat keterangan menikah atau undangan pernikahan",
+                        "Surat keterangan persalinan",
+                        "Surat keterangan pendampingan keluarga sakit atau bukti rawat inap",
+                        "Surat keterangan dari Ketua RT (khusus musibah/bencana)",
+                        "Surat keterangan kematian dari pihak berwenang"
+                    ],
                     steps: [
-                        { role: "Pemohon (JF Ahli Madya)", desc: "Penyerahan berkas fisik lengkap beserta bukti asli ke SDM.", icon: "fa-id-card", color: "blue" },
-                        { role: "Struktural Balai", desc: "Pemeriksaan administratif manual oleh tim kepegawaian Balai.", icon: "fa-file-shield", color: "blue" },
-                        { role: "Kepala Balai", desc: "Pengesahan berkas fisik secara resmi selaku Atasan Langsung.", icon: "fa-signature", color: "gold" },
-                        { role: "Setjen Kemendagri", desc: "Penyampaian usulan pengantar ke tingkat Sekretariat Jenderal.", icon: "fa-landmark", color: "gold" },
-                        { role: "Keputusan Sah", desc: "Persetujuan akhir dan keputusan cuti sah di tingkat pusat.", icon: "fa-file-circle-check", color: "emerald" }
+                        { role: "Pegawai / Pemohon", desc: "Penyerahan berkas permohonan ke Subbag SDM & Umum.", detail: "Pegawai menyerahkan berkas permohonan Cuti Kepada Subbag SDM & Umum", icon: "fa-user-tie", color: "blue" },
+                        { role: "Subbag SDM & Umum", desc: "Verifikasi kelengkapan berkas permohonan.", detail: "Subbag SDM & Umum memeriksa kelengkapan berkas permohonan Surat Cuti, jika tidak lengkap maka dikembalikan kepada pemohon untuk diperbaiki, jika lengkap maka berkas permohonan diserahkan kepada Kasubag SDM & Umum", icon: "fa-clipboard-check", color: "indigo" },
+                        { role: "Kasubag SDM & Umum", desc: "Pemeriksaan berkas & paraf Kasubag.", detail: "Kasubag SDM & Umum memeriksa berkas permohonan cuti, jika disetujui maka di paraf dan disampaikan kepada Kabag TU", icon: "fa-user-check", color: "amber" },
+                        { role: "Kabag TU", desc: "Paraf verifikasi oleh Kabag TU.", detail: "Kabag TU memeriksa berkas permohonan cuti, jika disetujui maka di paraf dan disampaikan kepada Kepala BBPK APDN IV Selaku Atasan Langsung", icon: "fa-shield-halved", color: "amber" },
+                        { role: "Kepala BBPK APDN IV", desc: "Penandatanganan berkas selaku Atasan Langsung.", detail: "Kepala BBPK APDN IV memeriksa berkas permohonan cuti, jika disetujui maka ditandatangani oleh Kepala BBPK APDN IV Selaku Atasan Langsung", icon: "fa-signature", color: "emerald" },
+                        { role: "Subbag SDM & Umum", desc: "Penyampaian pengantar via SRIKANDI.", detail: "Subbag SDM dan Umum menyusun serta menyampaikan surat pengantar pengajuan cuti melalui aplikasi SRIKANDI kepada BPSDM untuk selanjutnya ditindaklanjuti oleh Sekretaris Jenderal", icon: "fa-paper-plane", color: "emerald" }
                     ]
                 }
             }
         };
 
+        function showSection(id) {
+            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+
+            document.querySelectorAll('.bottom-nav .nav-link').forEach(l => l.classList.remove('active'));
+            if(document.getElementById('bot-' + id)) document.getElementById('bot-' + id).classList.add('active');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            render();
+        }
+
         function render() {
-            const flowContainer = document.getElementById('flow-content');
-            const checkContainer = document.getElementById('checklist-content');
-            const videoTitle = document.getElementById('video-title');
-            const videoBadge = document.getElementById('video-badge');
-            const mainVideo = document.getElementById('main-video');
-            
             const data = sopData[state.type][state.role];
             
-            // Update Text & Video
-            document.getElementById('display-time').innerText = data.time;
-            videoBadge.innerText = data.videoLabel;
-            videoTitle.innerText = `Panduan Cuti - ${state.role === 'pelaksana' ? 'Pelaksana & Jabatan Lain' : 'JF Ahli Madya'}`;
-            mainVideo.src = data.videoUrl;
+            // Header Rendering
+            document.getElementById('title-render').innerText = data.title;
+            document.getElementById('time-render').innerText = data.time;
 
-            let html = '';
-            data.steps.forEach((s, i) => {
-                const colorMap = {
-                    blue: 'text-blue-600 bg-blue-50 border-blue-100 shadow-blue-500/10',
-                    gold: 'text-amber-600 bg-amber-50 border-amber-100 shadow-amber-500/10',
-                    emerald: 'text-emerald-600 bg-emerald-50 border-emerald-100 shadow-emerald-500/10'
-                };
-                html += `
-                <div class="step-node flex gap-10 animate-fade relative group text-left" style="animation-delay: ${i * 0.1}s">
-                    <div class="flex-shrink-0 w-16 h-16 rounded-[1.4rem] border-2 flex items-center justify-center text-2xl z-10 shadow-xl transition-all duration-500 group-hover:scale-110 ${colorMap[s.color]}">
-                        <i class="fas ${s.icon}"></i>
+            // Checklist Rendering
+            document.getElementById('checklist-render').innerHTML = data.requirements.map(r => `
+                <div class="flex items-center gap-4 p-5 bg-white/5 rounded-2xl border border-white/5 transition-all hover:bg-blue-600/10">
+                    <div class="w-6 h-6 rounded-full bg-blue-500/20 border border-blue-500/40 flex items-center justify-center text-[10px] text-blue-400 shrink-0">
+                         <i class="fas fa-check"></i>
                     </div>
-                    <div class="flex-1 pb-12">
-                        <div class="glass-card p-10 rounded-[3rem] shadow-sm hover:shadow-2xl hover:border-gold transition-all duration-500 group-hover:translate-x-2">
-                            <span class="text-[9px] font-black text-slate-400 uppercase tracking-[0.3em] mb-4 block">Langkah 0${i+1}</span>
-                            <h5 class="text-2xl font-black text-slate-900 mb-3 tracking-tighter uppercase">${s.role}</h5>
-                            <p class="text-base text-slate-500 font-medium leading-relaxed">${s.desc}</p>
+                    <span class="text-slate-300 font-bold leading-tight text-xs">${r}</span>
+                </div>
+            `).join('');
+
+            // Combined Step + Detail Rendering
+            document.getElementById('flow-render').innerHTML = data.steps.map((s, i) => `
+                <div class="p-12 rounded-[5rem] card-vibrant flex flex-col md:flex-row items-center gap-12 group border-l-[20px] transition-all" style="border-left-color: var(--accent-${s.color})">
+                    <div class="relative shrink-0">
+                        <div class="w-28 h-28 bg-white/5 rounded-[3rem] flex items-center justify-center text-5xl text-white border border-white/10 group-hover:scale-110 transition-transform shadow-2xl shadow-black/50">
+                            <i class="fas ${s.icon}"></i>
+                        </div>
+                        <div class="absolute -top-5 -right-5 w-12 h-12 bg-gold text-primary rounded-full flex items-center justify-center text-xs font-black shadow-xl ring-4 ring-bg-dark">0${i+1}</div>
+                    </div>
+                    <div class="text-center md:text-left flex-1">
+                        <h5 class="text-[11px] font-black uppercase tracking-[0.6em] text-gold opacity-50 mb-4">${s.role}</h5>
+                        <p class="text-3xl lg:text-4xl font-black text-white uppercase tracking-tighter leading-none mb-6">${s.desc}</p>
+                        <div class="bg-white/5 p-8 rounded-[2.5rem] border border-white/5">
+                            <p class="text-sm text-slate-400 font-bold leading-relaxed">${s.detail}</p>
                         </div>
                     </div>
-                </div>`;
-            });
-            flowContainer.innerHTML = html;
+                </div>
+            `).join('');
 
-            let checkHtml = '';
-            data.requirements.forEach((req, idx) => {
-                checkHtml += `
-                <div class="flex items-center gap-4 bg-white/10 p-4 rounded-2xl border border-white/10 hover:bg-white/20 transition-colors">
-                    <input type="checkbox" id="check-${idx}" class="w-5 h-5 rounded accent-gold cursor-pointer">
-                    <label for="check-${idx}" class="text-sm font-bold cursor-pointer select-none leading-tight uppercase tracking-wide text-white">${req}</label>
-                </div>`;
-            });
-            checkContainer.innerHTML = checkHtml;
+            // Video Update
+            document.getElementById('video-frame').src = data.videoUrl;
+
+            // Sidebar Filter UI
+            const btnTahunan = document.getElementById('btn-tahunan');
+            const btnPenting = document.getElementById('btn-penting');
+            const act = 'bg-gold text-primary shadow-[0_20px_40px_-10px_rgba(197,160,89,0.5)] scale-105 border-gold';
+            const inact = 'bg-white/5 text-slate-500 border-white/10 hover:bg-white/10';
+            btnTahunan.className = `w-full py-6 rounded-3xl font-black text-xs uppercase transition-all border ${state.type === 'tahunan' ? act : inact}`;
+            btnPenting.className = `w-full py-6 rounded-3xl font-black text-xs uppercase transition-all border ${state.type === 'penting' ? act : inact}`;
+
+            // Sync Dropdown
+            document.getElementById('select-role').value = state.role;
+
+            // Sync Video Page Tabs
+            const vPel = document.getElementById('v-pel-btn');
+            const vMad = document.getElementById('v-mad-btn');
+            if(vPel) {
+                vPel.className = `px-10 py-6 rounded-[2.5rem] font-black text-[10px] uppercase transition-all ${state.role === 'pelaksana' ? 'bg-gold text-primary shadow-xl' : 'text-slate-500 hover:text-white'}`;
+                vMad.className = `px-10 py-6 rounded-[2.5rem] font-black text-[10px] uppercase transition-all ${state.role === 'madya' ? 'bg-gold text-primary shadow-xl' : 'text-slate-500 hover:text-white'}`;
+            }
         }
 
-        function updateType(t) {
-            state.type = t;
-            document.getElementById('type-tahunan').className = `flex-1 py-4 px-4 rounded-[1.6rem] font-black text-[10px] uppercase transition-all ${t === 'tahunan' ? 'nav-pill-active' : 'text-slate-500 hover:text-slate-700'}`;
-            document.getElementById('type-penting').className = `flex-1 py-4 px-4 rounded-[1.6rem] font-black text-[10px] uppercase transition-all ${t === 'penting' ? 'nav-pill-active' : 'text-slate-500 hover:text-slate-700'}`;
-            render();
-        }
-
-        function updateRole(val) {
-            state.role = val;
-            render();
-        }
-
-        // Initial Load
-        window.onload = render;
+        window.onload = () => { render(); };
     </script>
 </body>
 </html>
