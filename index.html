@@ -38,7 +38,7 @@
             background: 
                 radial-gradient(at 0% 0%, rgba(12, 26, 51, 1) 0px, transparent 50%),
                 radial-gradient(at 100% 0%, rgba(197, 160, 89, 0.2) 0px, transparent 50%),
-                radial-gradient(at 50% 100%, rgba(59, 130, 246, 0.2) 0px, transparent 50%),
+                radial-gradient(at 50% 100%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
                 #070f1d;
         }
 
@@ -103,7 +103,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: var(--bg-dark); }
         ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
@@ -116,7 +115,6 @@
             background-size: 1.2rem;
         }
 
-        /* CTA Button Glow */
         .btn-gold-glow {
             background: linear-gradient(135deg, var(--gold), #f3d4a0);
             box-shadow: 0 10px 40px -10px rgba(197, 160, 89, 0.6);
@@ -263,7 +261,6 @@
         <!-- SECTION: ALUR SOP -->
         <section id="alur" class="content-section">
             <div class="grid grid-cols-1 xl:grid-cols-12 gap-16">
-                <!-- Sidebar Controls -->
                 <div class="xl:col-span-4 space-y-10">
                     <div class="card-vibrant p-12 rounded-[4.5rem] border-gold/30">
                         <label class="text-[10px] font-black text-gold uppercase tracking-[0.8em] block mb-10 text-center">Filter Layanan</label>
@@ -286,7 +283,6 @@
                         </h4>
                         <div id="checklist-render" class="space-y-4 font-bold text-[11px]"></div>
                         
-                        <!-- Unduh Buttons inside Checklist -->
                         <div class="mt-12 pt-10 border-t border-white/10 space-y-4">
                             <a href="https://drive.google.com/drive/u/0/folders/1KGmfZeg5sUweOWVz7tYEFE2K1akv7m4D" target="_blank" class="w-full btn-gold-glow flex items-center justify-center gap-3 py-5 rounded-2xl text-primary font-black uppercase text-[10px] tracking-widest shadow-xl">
                                 <i class="fas fa-file-download text-sm"></i> Unduh Form Cuti
@@ -298,7 +294,6 @@
                     </div>
                 </div>
 
-                <!-- Interactive Flow Steps -->
                 <div class="xl:col-span-8 space-y-12">
                     <div class="card-vibrant p-12 lg:p-20 rounded-[5rem] relative overflow-hidden">
                         <div class="flex flex-col md:flex-row justify-between items-center mb-24 gap-12 text-center md:text-left">
@@ -306,14 +301,13 @@
                                 <h2 class="text-6xl font-black text-white uppercase tracking-tighter mb-4" id="title-render">Memuat...</h2>
                                 <span class="px-6 py-2 rounded-full bg-emerald-500/10 text-emerald-400 text-[10px] font-black uppercase tracking-widest border border-emerald-500/20">SOP Resmi 2026</span>
                             </div>
-                            <div class="bg-gradient-to-br from-gold to-gold-bright p-8 rounded-[3rem] text-primary shadow-2xl min-w-[14rem] text-center">
-                                <span class="text-[10px] font-black uppercase tracking-widest mb-1 block opacity-80">Mutu Baku</span>
-                                <div class="text-6xl font-black tracking-tighter" id="time-render">H-5</div>
-                                <span class="text-[9px] font-black uppercase tracking-widest opacity-80">Minimal Hari Kerja</span>
+                            <div class="bg-gradient-to-br from-gold to-gold-bright p-8 rounded-[2.5rem] text-primary shadow-2xl min-w-[12rem] text-center">
+                                <span class="text-[9px] font-black uppercase tracking-widest mb-1 block opacity-80">Mutu Baku</span>
+                                <div class="text-3xl lg:text-4xl font-black tracking-tighter" id="time-render">H-5</div>
+                                <span class="text-[8px] font-black uppercase tracking-widest opacity-80">Min. Hari Kerja</span>
                             </div>
                         </div>
 
-                        <!-- Combined Step + Narrative Rendering -->
                         <div id="flow-render" class="space-y-12 relative"></div>
                     </div>
                 </div>
@@ -343,25 +337,34 @@
 
         <!-- SECTION: WAKTU -->
         <section id="waktu" class="content-section">
-            <div class="text-center mb-32">
+            <div class="text-center mb-24">
                 <h2 class="text-7xl font-black text-white uppercase tracking-tighter">Ketentuan Waktu</h2>
                 <p class="text-gold font-bold text-[12px] tracking-[1.4em] uppercase mt-6">Target Mutu Pengajuan Minimal</p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-14 max-w-6xl mx-auto">
-                <div class="card-vibrant p-16 rounded-[6rem] text-center border-t-[20px] border-accent-blue group">
-                    <div class="text-9xl font-black text-accent-blue/10 group-hover:text-accent-blue transition-colors mb-10">H-5</div>
-                    <h3 class="text-4xl font-black text-white uppercase mb-4 tracking-tighter">Pelaksana, JF Ahli Muda Ke Bawah, Administrator, Pengawas, Keterampilan</h3>
-                    <p class="text-[11px] text-slate-500 font-black uppercase tracking-[0.4em] leading-relaxed">Tahunan & Sakit<br>Proses Internal Balai</p>
+            
+            <div class="flex flex-col gap-10 max-w-4xl mx-auto">
+                <div class="card-vibrant p-12 lg:p-16 rounded-[4rem] flex flex-col md:flex-row items-center gap-10 border-l-[16px] border-accent-blue group">
+                    <div class="text-7xl lg:text-8xl font-black text-accent-blue/20 group-hover:text-accent-blue transition-colors shrink-0">H-5</div>
+                    <div class="text-center md:text-left flex-1">
+                        <h3 class="text-3xl font-black text-white uppercase mb-2 tracking-tighter leading-tight">Pelaksana, JF Ahli Muda Ke Bawah, Administrator, Pengawas, Keterampilan</h3>
+                        <p class="text-[11px] text-slate-500 font-black uppercase tracking-[0.4em] leading-relaxed">Cuti Tahunan & Sakit</p>
+                    </div>
                 </div>
-                <div class="bg-primary/90 border border-gold/40 p-16 rounded-[6rem] text-center border-t-[20px] border-gold shadow-3xl scale-110 relative z-10">
-                    <div class="text-9xl font-black text-gold/20 mb-10">H-7</div>
-                    <h3 class="text-4xl font-black text-white uppercase mb-4 tracking-tighter">Ahli Madya</h3>
-                    <p class="text-[11px] text-gold/60 font-black uppercase tracking-[0.4em] leading-relaxed">Tahunan & Sakit Madya<br>Usulan via SRIKANDI</p>
+
+                <div class="bg-primary/80 border border-gold/40 p-12 lg:p-16 rounded-[4rem] flex flex-col md:flex-row items-center gap-10 border-l-[16px] border-gold shadow-3xl relative z-10 ring-1 ring-gold/20">
+                    <div class="text-7xl lg:text-8xl font-black text-gold/30 shrink-0">H-7</div>
+                    <div class="text-center md:text-left flex-1">
+                        <h3 class="text-3xl font-black text-white uppercase mb-2 tracking-tighter leading-tight">Jabatan Fungsional Ahli Madya</h3>
+                        <p class="text-[11px] text-gold/60 font-black uppercase tracking-[0.4em] leading-relaxed">Cuti Tahunan & Sakit Madya</p>
+                    </div>
                 </div>
-                <div class="card-vibrant p-16 rounded-[6rem] text-center border-t-[20px] border-accent-amber group">
-                    <div class="text-9xl font-black text-accent-amber/10 group-hover:text-accent-amber transition-colors mb-10">H-12</div>
-                    <h3 class="text-4xl font-black text-white uppercase mb-4 tracking-tighter">Penting</h3>
-                    <p class="text-[11px] text-slate-500 font-black uppercase tracking-[0.4em] leading-relaxed">Cuti Alasan Penting & Melahirkan<br>Proses Biro SDM Pusat</p>
+
+                <div class="card-vibrant p-12 lg:p-16 rounded-[4rem] flex flex-col md:flex-row items-center gap-10 border-l-[16px] border-accent-amber group">
+                    <div class="text-7xl lg:text-8xl font-black text-accent-amber/20 group-hover:text-accent-amber transition-colors shrink-0">H-12</div>
+                    <div class="text-center md:text-left flex-1">
+                        <h3 class="text-3xl font-black text-white uppercase mb-2 tracking-tighter leading-tight">Cuti Alasan Penting & Cuti Melahirkan</h3>
+                        <p class="text-[11px] text-slate-500 font-black uppercase tracking-[0.4em] leading-relaxed">Seluruh Jabatan</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -374,7 +377,6 @@
                     <p class="text-gold font-bold text-[12px] tracking-[1.2em] uppercase mt-6">Tanya Jawab Teknis</p>
                 </div>
                 
-                <!-- FAQ Item 1 -->
                 <details class="group card-vibrant p-14 rounded-[4.5rem] cursor-pointer">
                     <summary class="list-none flex justify-between items-center font-black text-lg uppercase tracking-[0.2em] text-white">
                         <span>Siapa yang memeriksa permohonan cuti?</span>
@@ -387,7 +389,6 @@
                     </div>
                 </details>
 
-                <!-- FAQ Item 2 -->
                 <details class="group card-vibrant p-14 rounded-[4.5rem] cursor-pointer">
                     <summary class="list-none flex justify-between items-center font-black text-lg uppercase tracking-[0.2em] text-white">
                         <span>Apa yang terjadi jika administrasi cuti tidak lengkap?</span>
@@ -400,10 +401,9 @@
                     </div>
                 </details>
 
-                <!-- FAQ Item 3 -->
                 <details class="group card-vibrant p-14 rounded-[4.5rem] cursor-pointer">
                     <summary class="list-none flex justify-between items-center font-black text-lg uppercase tracking-[0.2em] text-white">
-                        <span>Apa yang dilakukan pegawai jika mengalami kondisi mendadak seperti sakit atau keadaan darurat?</span>
+                        <span>Laporan kondisi mendadak?</span>
                         <div class="w-16 h-16 bg-white/5 rounded-[2rem] flex items-center justify-center group-open:rotate-45 transition-transform border border-white/10">
                             <i class="fas fa-plus text-gold"></i>
                         </div>
@@ -413,7 +413,6 @@
                     </div>
                 </details>
 
-                <!-- FAQ Item 4 (Original) -->
                 <details class="group card-vibrant p-14 rounded-[4.5rem] cursor-pointer">
                     <summary class="list-none flex justify-between items-center font-black text-lg uppercase tracking-[0.2em] text-white">
                         <span>Hak sisa cuti tahunan?</span>
@@ -434,7 +433,7 @@
     </footer>
 
     <script>
-        let state = { type: 'tahunan', role: 'pelaksana' };
+        const state = { type: 'tahunan', role: 'pelaksana' };
 
         const sopData = {
             tahunan: {
@@ -512,7 +511,7 @@
             }
         };
 
-        function showSection(id) {
+        window.showSection = (id) => {
             document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
 
@@ -520,17 +519,15 @@
             if(document.getElementById('bot-' + id)) document.getElementById('bot-' + id).classList.add('active');
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
-            render();
-        }
+            window.render();
+        };
 
-        function render() {
+        window.render = () => {
             const data = sopData[state.type][state.role];
             
-            // Header Rendering
             document.getElementById('title-render').innerText = data.title;
             document.getElementById('time-render').innerText = data.time;
 
-            // Checklist Rendering
             document.getElementById('checklist-render').innerHTML = data.requirements.map(r => `
                 <div class="flex items-center gap-4 p-5 bg-white/5 rounded-2xl border border-white/5 transition-all hover:bg-blue-600/10">
                     <div class="w-6 h-6 rounded-full bg-blue-500/20 border border-blue-500/40 flex items-center justify-center text-[10px] text-blue-400 shrink-0">
@@ -540,7 +537,6 @@
                 </div>
             `).join('');
 
-            // Combined Step + Detail Rendering
             document.getElementById('flow-render').innerHTML = data.steps.map((s, i) => `
                 <div class="p-12 rounded-[5rem] card-vibrant flex flex-col md:flex-row items-center gap-12 group border-l-[20px] transition-all" style="border-left-color: var(--accent-${s.color})">
                     <div class="relative shrink-0">
@@ -559,10 +555,8 @@
                 </div>
             `).join('');
 
-            // Video Update
             document.getElementById('video-frame').src = data.videoUrl;
 
-            // Sidebar Filter UI
             const btnTahunan = document.getElementById('btn-tahunan');
             const btnPenting = document.getElementById('btn-penting');
             const act = 'bg-gold text-primary shadow-[0_20px_40px_-10px_rgba(197,160,89,0.5)] scale-105 border-gold';
@@ -570,19 +564,20 @@
             btnTahunan.className = `w-full py-6 rounded-3xl font-black text-xs uppercase transition-all border ${state.type === 'tahunan' ? act : inact}`;
             btnPenting.className = `w-full py-6 rounded-3xl font-black text-xs uppercase transition-all border ${state.type === 'penting' ? act : inact}`;
 
-            // Sync Dropdown
             document.getElementById('select-role').value = state.role;
 
-            // Sync Video Page Tabs
             const vPel = document.getElementById('v-pel-btn');
             const vMad = document.getElementById('v-mad-btn');
             if(vPel) {
-                vPel.className = `px-10 py-6 rounded-[2.5rem] font-black text-[10px] uppercase transition-all ${state.role === 'pelaksana' ? 'bg-gold text-primary shadow-xl' : 'text-slate-500 hover:text-white'}`;
-                vMad.className = `px-10 py-6 rounded-[2.5rem] font-black text-[10px] uppercase transition-all ${state.role === 'madya' ? 'bg-gold text-primary shadow-xl' : 'text-slate-500 hover:text-white'}`;
+                vPel.className = `px-10 py-6 rounded-[2.5rem] font-black text-[9px] uppercase transition-all ${state.role === 'pelaksana' ? 'bg-gold text-primary shadow-xl' : 'text-slate-500 hover:text-white'}`;
+                vMad.className = `px-10 py-6 rounded-[2.5rem] font-black text-[9px] uppercase transition-all ${state.role === 'madya' ? 'bg-gold text-primary shadow-xl' : 'text-slate-500 hover:text-white'}`;
             }
-        }
+        };
 
-        window.onload = () => { render(); };
+        window.updateType = (t) => { state.type = t; window.render(); };
+        window.updateRole = (r) => { state.role = r; window.render(); };
+
+        window.onload = () => { window.render(); };
     </script>
 </body>
 </html>
